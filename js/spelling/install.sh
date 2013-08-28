@@ -1,10 +1,12 @@
 #!/bin/sh
-if ! hash mkvirtualenv 2>/dev/null; then
+if ! hash virtualenv 2>/dev/null; then
     sudo pip install virtualenv
 fi
 
-mkvirtualenv spelling
-pip install -r requirements 
-nodeenv spelling
+virtualenv spelling
 source ./spelling/bin/activate
+
+pip install -r requirements 
+nodeenv spelling_node
+source ./spelling_node/bin/activate
 npm install 
