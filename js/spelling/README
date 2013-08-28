@@ -14,6 +14,7 @@ __REQUIREMENTS__
 
 Unix compatible environment
 Python
+pip
 Virtualenv (although it will attempt to install it if not present)
    
 
