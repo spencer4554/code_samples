@@ -10,5 +10,4 @@ module.exports = function(app) {
 
 	// error handlers
 	app.use(base.errorHandler);
-
 };

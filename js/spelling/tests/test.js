@@ -22,7 +22,7 @@ describe('Test Spelling', function() {
         test_words.forEach(function (word) {
 	    request(app)
 	        .get('/spellcheck/' + word)
-	        .set('Content-Type','application/json')
+	        .set('Accept','application/json')
 	        .expect(200)
                 .end(function(err, res) {
                     var result = res.body;
@@ -42,7 +42,7 @@ describe('Test Spelling', function() {
         test_words.forEach(function (word) {
 	    request(app)
 	        .get('/spellcheck/' + word)
-	        .set('Content-Type','application/json')
+	        .set('Accept','application/json')
 	        .expect(200)
                 .end(function(err, res) {
                     var result = res.body;
@@ -56,7 +56,7 @@ describe('Test Spelling', function() {
     it('Test if blatantly incorrect word produces no suggestions', function(done) {
 	request(app)
 	    .get('/spellcheck/supercalifragilisticexpialadocious')
-	    .set('Content-Type','application/json')
+	    .set('Accept','application/json')
 	    .expect(200)
             .end(function(err, res) {
                var result = res.body;
@@ -70,7 +70,7 @@ describe('Test Spelling', function() {
     it('Test if non ascii characters throws an error', function(done) {
 	request(app)
 	    .get('/spellcheck/œŁ好')
-	    .set('Content-Type','application/json')
+	    .set('Accept','application/json')
 	    .expect(200)
             .end(function(err, res) {
                var result = res.body;
@@ -79,7 +79,6 @@ describe('Test Spelling', function() {
                done();
             });
     });
-});
 
     it('Test if non json content type throws an error', function(done) {
 	request(app)
