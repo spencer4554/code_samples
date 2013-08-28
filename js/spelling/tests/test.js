@@ -81,3 +81,11 @@ describe('Test Spelling', function() {
     });
 });
 
+    it('Test if non json content type throws an error', function(done) {
+	request(app)
+	    .get('/spellcheck/hello')
+            .set('Accept', 'application/xml')
+            .expect(500, done);
+    });
+
+});

@@ -3,6 +3,7 @@
  */
 module.exports = {
     errorHandler:  function (err, req, res, next) {
+        res.statusCode = 500;
 	res.send({'code': 500, 'errorType': 'UNKNOWN', 'errorMessage': 'An unexpected error has occurred. Please try again later.'});
     },
 
