@@ -1,0 +1,4 @@
+Spelling
+==========
+
+Simple spelling api.
