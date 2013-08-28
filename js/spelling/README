@@ -26,12 +26,7 @@ To install run:
 
 ./install.sh
 
-This should work on linux or mac os X.  It will produce a single warning:
-
-npm WARN package.json supertest@0.0.1 No repository field.
-
-This is expected and is an issue with the Supertest package. 
-
+This has been tested on Mac OS 10.8 (with developer tools) and Ubuntu 12.04.  Your mileage may vary.  Node.js takes an extremely long time (1 hour+) to compile on a AWS Micro instance.  I would be happy to provide a aws instance for you to test this on if desired.
 
 __RUNNING_TESTS__
 
@@ -48,7 +43,7 @@ To run the server:
 
 then in a local web browser you should be able to:
 
-http://localhost:3000/spellcheck/word
+http://localhost:3000/spellcheck/[WORD_TO_LOOKUP]
 
 and it will return a response in the following format:
 
@@ -59,4 +54,10 @@ and it will return a response in the following format:
     "correct": true
   }
 }
+
+__UNINSTALLING__
+
+Deleting this directory will uninstall everything except virtualenv.  To remove virtualenv run:
+
+sudo pip uninstall virtualenv
 
