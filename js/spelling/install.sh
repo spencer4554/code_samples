@@ -1,5 +1,5 @@
 #!/bin/sh
-if !hash mkvirtualenv 2>/dev/null; then
+if ! hash mkvirtualenv 2>/dev/null; then
     sudo pip install virtualenv
 fi
 
