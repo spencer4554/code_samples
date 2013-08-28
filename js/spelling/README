@@ -14,8 +14,8 @@ __REQUIREMENTS__
 
 Unix compatible environment
 Python
-Virtualenv (although it will try to install it if not present)
-
+Virtualenv (although it will attempt to install it if not present)
+   
 
 __INSTALLATION__
 
@@ -30,12 +30,6 @@ This should work on linux or mac os X.  It will produce a single warning:
 npm WARN package.json supertest@0.0.1 No repository field.
 
 This is expected and is an issue with the Supertest package. 
-
-sudo pip install virtualenv
-
-If you do not have sudo privileges on your user please install virtualenv as root before running the script by doing the following:
-
-pip install virtualenv
 
 
 __RUNNING_TESTS__
