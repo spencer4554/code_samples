@@ -18,6 +18,7 @@ pip
 Virtualenv (although it will attempt to install it if not present)
 make, gcc, g++ to compile node.js
 
+
 __INSTALLATION__
 
 The install script attempts to create a python virtualenv, then to install nodeenv (and compile Node.js) in this python virtualenv and then to install the necessary node packages.  
@@ -27,6 +28,26 @@ To install run:
 ./install.sh
 
 This has been tested on Mac OS 10.8 (with developer tools) and Ubuntu 12.04.  Your mileage may vary.  Node.js takes an extremely long time (1 hour+) to compile on a AWS Micro instance.  I would be happy to provide a aws instance for you to test this on if desired.
+
+
+__INSTALLATION_ON_AMAZON_AWS__
+
+I used this ami:
+
+ubuntu/images/ebs/ubuntu-precise-12.04-amd64-server-20130411.1 (ami-d0f89fb9)
+
+Then i ran the following:
+
+sudo apt-get update
+sudo apt-get install git
+sudo apt-get install python-pip
+sudo apt-get install make
+sudo apt-get install gcc
+sudo apt-get install g++
+sudo pip install virtualenv
+
+./install.sh
+
 
 __RUNNING_TESTS__
 
@@ -54,6 +75,7 @@ and it will return a response in the following format:
     "correct": true
   }
 }
+
 
 __UNINSTALLING__
 
