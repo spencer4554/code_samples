@@ -1,0 +1,67 @@
+__AUTHOR__ = "Paul Prior"
+__STATUS__ = "Code Sample"
+
+__DESCRIPTION__
+
+Sample code written using Node.js and Express for the following problem:
+
+1) Build a RESTful spell-checking service
+
+This service should have a resource that accepts a word and returns a response indicating whether the word is spelled correctly, with suggestions if it’s mis-spelled.  You’re welcome to use existing spell-check libraries as you see fit.
+
+
+__REQUIREMENTS__
+
+Unix compatible environment
+Python
+Virtualenv (although it will try to install it if not present)
+
+
+__INSTALLATION__
+
+The install script attempts to create a python virtualenv, then to install nodeenv (and Node.js) in this python virtualenv and then to install the necessary node packages.  
+
+To install run:
+
+./install.sh
+
+This should work on linux or mac os X.  It will produce a single warning:
+
+npm WARN package.json supertest@0.0.1 No repository field.
+
+This is expected and is an issue with the Supertest package. 
+
+sudo pip install virtualenv
+
+If you do not have sudo privileges on your user please install virtualenv as root before running the script by doing the following:
+
+pip install virtualenv
+
+
+__RUNNING_TESTS__
+
+To run the unit tests:
+
+./run_tests.sh
+
+
+__RUNNING_SERVER__
+
+To run the server:
+
+./run.sh
+
+then in a local web browser you should be able to:
+
+http://localhost:3000/spellcheck/word
+
+and it will return a response in the following format:
+
+{
+  "code": 200,
+  "data": {
+    "suggestions": [],
+    "correct": true
+  }
+}
+
