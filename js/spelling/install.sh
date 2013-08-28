@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if ! hash virtualenv 2>/dev/null; then
     sudo pip install virtualenv
 fi
