@@ -12,6 +12,6 @@ var port = 3000;
 
 app.listen(port);
 
-console.log('API v3 started on port ' + port + '...');
+console.log('Spelling API started on port ' + port + '...');
 
 module.exports = app;
