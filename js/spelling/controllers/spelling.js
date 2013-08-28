@@ -1,6 +1,5 @@
 var SpellCheck = require('spellcheck'),
-    delimeter = (process.platform === 'win32' ? '\\' : '/'),
-    basedir = __dirname + delimeter + ".." + delimeter + "dictionaries" + delimeter,
+    basedir = __dirname + '/../dictionaries/',
     spell = new SpellCheck(basedir + 'en_US.aff', basedir + 'en_US.dic');
 
 exports.spellCheck = function(req, res, next) {
@@ -9,6 +8,8 @@ exports.spellCheck = function(req, res, next) {
             return next(err);
         }
         else {
+            // If we don't do this, suggestions will not appear in the result if 
+            // there are no suggestions
             if (typeof suggestions == 'undefined') {
                 suggestions = [];
             }
