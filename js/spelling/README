@@ -16,11 +16,11 @@ Unix compatible environment
 Python
 pip
 Virtualenv (although it will attempt to install it if not present)
-   
+make, gcc, g++ to compile node.js
 
 __INSTALLATION__
 
-The install script attempts to create a python virtualenv, then to install nodeenv (and Node.js) in this python virtualenv and then to install the necessary node packages.  
+The install script attempts to create a python virtualenv, then to install nodeenv (and compile Node.js) in this python virtualenv and then to install the necessary node packages.  
 
 To install run:
 
