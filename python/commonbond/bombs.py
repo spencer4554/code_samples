@@ -29,6 +29,7 @@ class Bomb_Placement:
         return all([False for x in ["<",">","X","B"] if x in self.get_current_state()])
     
     def iterate(self):
+        self.original_position = self.transitional_state
         self.transitional_state = list("." * len(self.original_position))
         
         for position in range(0, len(self.transitional_state)):
@@ -48,7 +49,6 @@ def explode(bomb_placement, force):
     placement = Bomb_Placement(bomb_placement, force)
     
     while not placement.is_done():
-        placement = Bomb_Placement(answer[-1], force)
         placement.iterate()
         answer.append(placement.get_current_state())
 
@@ -60,11 +60,10 @@ def main():
              ("B.B.B.BB.", 2): ["B.B.B.BB.", "<.X.X<>.>", "<.<<>.>.>", "<<....>.>", "........>", "........."],
              ("..B.B..B", 1): ["..B.B..B", ".<.X.><.", "<.<.><>.", ".<..<>.>", "<..<..>.", "..<....>", ".<......", "<.......", "........"],
              ("..B.BB..B.B..B...", 1): ["..B.BB..B.B..B...", ".<.X<>><.X.><.>..", "<.<<>.X><.><>..>.", ".<<..X.X>.<>.>..>", "<<..<.X.>X..>.>..", "<..<.<.><>>..>.>.", "..<.<..<>.>>..>.>", ".<.<..<..>.>>..>.", "<.<..<....>.>>..>", ".<..<......>.>>..", "<..<........>.>>.", "..<..........>.>>", ".<............>.>", "<..............>.", "................>", "................."]}
-    
-    def adapter(args):
-        return explode(args[0], args[1])
 
-    run(adapter, tests, """USAGE: %s \"bomb placement\" force or test""")
+    def adapter(args): return explode(args[0], args[1])
+
+    run(adapter, tests, """USAGE: %s \"bomb placement\" force or test""", 2)
     
 
 if __name__ == '__main__':

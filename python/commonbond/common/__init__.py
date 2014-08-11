@@ -1,12 +1,14 @@
 import sys
 
-def run(func, tests, usage):
+def run(func, tests, usage, num_args):
     if sys.argv[1] == "test":
         test(func, tests)
-    elif len(sys.argv) != 2:
+    elif len(sys.argv) != num_args + 1:
         print usage % sys.argv[0]
     else:
-        print func(sys.pop(0))
+        args = sys.argv
+        args.pop(0)
+        print func(args)
 
 def test(func, tests):
     passed_tests = 0
