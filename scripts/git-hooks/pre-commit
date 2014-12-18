@@ -174,11 +174,11 @@ CHECKS = [
         'match_files': ['.*\.py$'],
         'ignore_files': ['.*migrations.*', '^gists/.*', '^conf/.*'],
     },
-    # {
-    #     'output': 'Checking for default, mutable arguments',
-    #     'command': 'pylint --rcfile .pylintrc --reports=n --disable=all --enable=W0102 "{file_name}"',
-    #     'match_files': ['.*\.py$'],
-    # },
+    {
+        'output': 'Checking for default, mutable arguments',
+        'command': 'pylint --rcfile .pylintrc --reports=n --disable=all --enable=W0102 "{file_name}"',
+        'match_files': ['.*\.py$'],
+    },
     # {
     #     'output': 'Running jshint...',
     #     # By default, jshint prints 'Lint Free!' upon success. We want to filter this out.
