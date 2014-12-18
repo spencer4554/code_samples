@@ -359,8 +359,8 @@ def main(files, is_git_hook):
 
         if any_changes_on_files_ending_with('.py'):
             # run('python unit tests', 'make unit', env={'SKIP_DEPS': 'true'})
-            run('django check', 'python manage.py check')
-            run('django model validation', 'python manage.py validate')
+            run('django check', 'python python/ticketing/tckt/manage.py check')
+            run('django model validation', 'python python/ticketing/tckt/manage.py validate')
 
         # Remove for now since we don't have JS tests here yet.
         # if any_changes_on_files_ending_with('.js'):
