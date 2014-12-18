@@ -1,0 +1,13 @@
+.DS_Store
+*.pyc
+.coverage
+dist/
+compiled/
+*.egg-info/
+setup.py.bak
+*.sqlite
+node_modules
+.sass-cache/
+static/versioned
+.#*
+npm-debug.log
