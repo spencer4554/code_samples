@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Usage: scripts/bin/create-database
+
+This command will create DATABASE_AUTH in the configured mysql
+server. It will remove any databases with the same name before trying to
+create it.
+
+To define the database server, please export a variable called
+`DATABASE_AUTH` containing a database URI, just like this:
+
+   $ export DATABASE_AUTH=mysql://root@localhost:3306/cadre
+
+"""
+
+from __future__ import unicode_literals, print_function, absolute_import
+from warnings import filterwarnings
+from envelop import Environment
+
+import MySQLdb
+
+
+def create_db():
+    # The drop database if exists will raise a warning if there's no db, so we
+    # do that to avoid that ugly message in our script
+    filterwarnings('ignore', category=MySQLdb.Warning)
+
+    # Loading the environment to we can connect to the local database
+    env = Environment()
+    db_auth = env.get_uri('DATABASE_DEFAULT')
+    dbname = db_auth.path.strip('/')
+
+    # Finally connecting to the mysql server and creating the database
+    connection = MySQLdb.connect(
+        db_auth.host, db_auth.user, db_auth.password or '', 'mysql')
+    cursor = connection.cursor()
+    cursor.execute("DROP DATABASE IF EXISTS {};".format(dbname))
+    cursor.execute("CREATE DATABASE IF NOT EXISTS {};".format(dbname))
+    connection.close()
+
+
+if __name__ == '__main__':
+    create_db()
