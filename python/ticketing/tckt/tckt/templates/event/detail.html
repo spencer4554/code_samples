@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% block body %}
+  <style>
+   .event-date {
+     float: left;
+     margin: 0 20px 10px 0;
+     padding: 8px;
+     text-align: center;
+     background: #F1B51C;
+   }
+   .event-date-month, .event-date-day-of-week, .event-date-divider {
+     margin: 0 0 5px 0;
+     padding: 0 0 0px 0;
+     font-family: "kulturista", Georgia, Times, "Times New Roman", serif;
+     font-size: 15px;
+     font-weight: normal;
+     color: #FFFFFF;
+     font-style: italic;
+     text-transform: uppercase;
+     text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+   }
+   .event-date-day {
+     margin: 0;
+     padding: 0;
+     font-family: "runda", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     font-size: 30px;
+     font-weight: bold;
+     line-height: 1;
+     color: #FFFFFF;
+     text-shadow: 0 1px 1px rgba(0,0,0,0.28);
+   }
+   .event-name {
+     font-weight: bold;
+   }
+   .event-presenter {
+     font-size: 12px;
+     font-style: italic;
+   }
+   .event-subtitle {
+     font-size: 12px;
+   }
+   .event-details span {
+     display:block
+   }
+   .location-name {
+     font-size: 14px;
+     font-weight: bold;
+   }
+   .location-address span {
+     font-size: 12px;
+     display: block;
+   }
+   .ticket-column-headings {
+     font-size: 11px;
+     font-weight: 300;
+     text-transform: uppercase;
+     border-bottom: 1px solid #e9ebef;
+     padding-bottom: 10px;
+     margin-top: 0;
+     white-space: nowrap;
+   }
+   .fa-info {
+     background: url({% static 'img/tooltip.png' %}) no-repeat center center;
+     width: 4px;
+     height: 9px;
+     display: inline-block;
+     padding-left: 20px;
+   }
+
+   div.tooltip {
+     text-transform: none;
+   }
+
+   .fade.in {
+     opacity: 1 !important;
+     transition: opacity 0.25s ease in out;
+     -moz-transition: opacity 0.25s ease in out;
+     -webkit-transition: opacity 0.25s ease-in-out;
+   }
+
+   .tooltip.top {
+     padding: 5px o;
+     margin-top: -3px;
+   }
+
+   .tooltip.in {
+     filter: alpha(opacity=90);
+     opacity: .9;
+   }
+
+   .fade.in {
+     opacity: 1;
+   }
+
+   .tooltip {
+     position: absolute;
+     z-index: 1070;,
+     display: block;
+     font-size: 12px;
+     line-height: 1.4;
+     visibility: visible;
+     filter: alpha(opacity=0);
+     opacity: 0;
+     box-sizing: border-box;
+   }
+
+   .tooltip.top .tooltip-arrow {
+     bottom: 0;
+     left: 50%;
+     margin-left: -5px;
+     border-width: 5px 5px 0;
+     border-top-color: #000;
+   }
+
+   .tooltip-arrow {
+     position: absolute;
+     width: 0;
+     height: 0;
+     border-color: transparent;
+     border-style: solid;
+     box-sizing: border-box;
+   }
+
+   .ticket-column-data {
+     margin-top: 20px;
+   }
+
+   .row .columns .ticket-column-data {
+     float: none;
+     text-align: center;
+   }
+
+   .row .columns .ticket-column-data.ticket-type {
+     float: left;
+   }
+
+   .ticket-details {
+     text-align: center;
+   }
+
+  </style>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row">
+        <div class="large-1 columns">
+          <div class="event-date">
+            <p class="event-date-day-of-week">Mon</p>
+            <p class="event-date-month">Dec</p>
+            <p class="event-date-day">29</p>
+          </div>
+        </div>
+        <div class="large-7 columns">
+          <span class="event-presenter">Chris Ricci Presents</span>
+          <h2 class="event-name">THE GREEN</h2>
+          <span class="event-subtitle">Chocolate & Roses Tour + Special Guest: Through The Roots</span>
+        </div>
+        <div class="large-4 columns">
+          <span class="location-name">Fat Cat Music House and Lounge</span>
+          <a class="event-location" href="http://maps.google.com/maps?daddr=289%20Kent%20Avenue%2011249" rel="nofollow" target="_blank"><img src="https://cdn.ticketfly.com/wp-content/themes/ticketfly-v3/img/icon-location-small.gif"></a>
+          <div class="location-address">
+            <span>289 Kent Avenue</span>
+            <span>Brooklyn, NY, 11249</span>
+            <span>917.306.8629</span>
+          </div>
+          <div class="event-start">
+            Doors 7:00pm / Show 8:00pm
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="large-12 columns" role="content">
+      <article>
+        <div class="row">
+          <div class="large-4 columns">
+            <img src="{% static 'img/thegreen.jpg' %}"/>
+          </div>
+          <div class="large-8 columns event-details">
+            <div class="row">
+              <div class="large-12">
+                <span class="ticket-column-headings">Buy Tickets</span>
+                <p class="">There is a 10 ticket limit per customer. Service fees are non-refundable.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12">
+                <div class="ticket-header large-3 columns">
+                  <span class="ticket-column-headings">Ticket Type</span>
+                  <p class="ticket-type ticket-column-data">Regular</p>
+                </div>
+                <div class="ticket-details large-9 columns">
+                  <ul>
+                    <li class="large-3 columns">
+                      <span class="ticket-column-headings">Item Price</span>
+                      <p class="ticket-price ticket-column-data">$20.00</p>
+                    </li>
+                    <li class="large-3 columns">
+                      <span class="ticket-column-headings">Service Fee<i class="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></span>
+                      <p class="ticket-service-fee ticket-column-data">$1.53</p>
+                    </li>
+                    <li class="large-3 columns">
+                      <span class="ticket-column-headings">Facilities Fee</span>
+                      <p class="ticket-facilities-fee ticket-column-data">$1.00</p>
+                    </li>
+                    <li class="large-3 columns">
+                      <span class="ticket-column-headings">Quantity</span>
+                      <select name="ticket-quantity" id="tt_330880" onchange="validateTTError();" class="ticket-quantity ticket-column-data">
+                        <option></option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                      </select>
+                      <p class="ticket-service-fee ticket-column-data"></p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <div class="event-detail">
+              <span>The Green live at the Fat Cat Music House and Lounge</span>
+              <span>Doors at 6PM Show at 7PM</span>
+              <span>For Booth reservations or questions please call 209-312-3463</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    </aside>
+  </div>
+{% endblock %}

@@ -8,7 +8,7 @@ from django.db import models
 
 def _image_upload_to(instance, filename):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-    return "offer-image/{}/{}/{}.jpg".format(instance.offering.uid, instance.ref, timestamp)
+    return "event-image/{}/{}/{}.jpg".format(instance.id, timestamp)
 
 
 class Location(models.Model):
