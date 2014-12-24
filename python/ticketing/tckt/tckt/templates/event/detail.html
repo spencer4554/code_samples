@@ -39,9 +39,17 @@
    .event-subtitle {
      font-size: 12px;
    }
-   .event-details span {
+   .event-right-column span {
      display:block
    }
+   .event-detail {
+     margin-left: 10px;
+   }
+   .event-details {
+     margin-top:10px;
+     font-size:14px;
+   }
+
    .location-name {
      font-size: 14px;
      font-weight: bold;
@@ -186,7 +194,7 @@
           <div class="large-4 columns">
             <img src="{% static 'img/thegreen.jpg' %}"/>
           </div>
-          <div class="large-8 columns event-details">
+          <div class="large-8 columns event-right-column">
             <div class="ticketing">
               <div class="row">
                 <div class="large-12 column">
@@ -261,12 +269,19 @@
                 </div>
               </div>
             </div>
-
-            <hr />
+            <br />
             <div class="event-detail">
-              <span>The Green live at the Fat Cat Music House and Lounge</span>
-              <span>Doors at 6PM Show at 7PM</span>
-              <span>For Booth reservations or questions please call 209-312-3463</span>
+              <div class="row">
+                <div class="large-12 column">
+                  <span class="ticket-column-headings">Event Details</span>
+                  <p class="event-details">
+                    <span>The Green live at the Fat Cat Music House and Lounge</span>
+                    <span>Doors at 6PM Show at 7PM</span>
+                    <span>21+ event</span>
+                    <span>For Booth reservations or questions please call 209-312-3463</span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
