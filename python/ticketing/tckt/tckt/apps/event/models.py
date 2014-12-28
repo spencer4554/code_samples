@@ -18,6 +18,7 @@ class Location(models.Model):
     city = models.CharField(max_length=256)
     state = models.CharField(max_length=2)
     zipcode = models.CharField(max_length=5)
+    phone = models.CharField(max_length=15)
 
 
 class Event(models.Model):
