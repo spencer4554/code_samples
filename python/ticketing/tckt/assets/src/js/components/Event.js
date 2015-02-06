@@ -14,7 +14,7 @@ var EventHeader = React.createClass({
                 <img src="{% static 'img/thegreen.jpg' %}"/>
               </div>
               <div className="large-8 columns event-right-column">
-                <Ticketing  />
+                <Ticketing  {...this.props} />
                 <br />
                 <div className="event-detail">
                   <div className="row">

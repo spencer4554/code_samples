@@ -10,5 +10,5 @@ module.exports.getEventHeader = function(event) {
 };
 
 module.exports.getEventDetail = function(event) {
-    return <Event />;
+    return <Event max_quantity={10} price={20} serviceFee={1.53} facilitiesFee={1} />;
 };

@@ -3,15 +3,50 @@
 React = require('react');
 var _ = require("underscore");
 var $ = require('jquery');
+var number = require('../utils/number');
 
 var Ticketing = React.createClass({
+    getInitialState: function() {
+        return {'quantity': 0}
+    },
+
+    changeQuantity: function(event) {
+        this.setState({'quantity': event.target.value});
+    },
+
+    drawTicketSelect: function() {
+        return (
+            <select onChange={this.changeQuantity} name="ticket-quantity" className="ticket-quantity ticket-column-data" style={{marginTop: 10}}>
+              <option>Select #</option>
+              { _.map(_.range(10), function(i) { return <option value={i+1}>{i+1}</option> }) }
+            </select>)
+    },
+
+    drawTotals: function() {
+        return (
+            <div className="row">
+              <div className="large-12">
+                <div className="ticket-header large-4 columns">
+                  <p className="ticket-shipping ticket-column-data">Total:</p>
+                </div>
+                <div className="ticket-header large-2 columns">
+                  <p className="ticket-shipping ticket-column-data">{number.asCurrency(this.calculateTotal())}</p>
+                </div>
+              </div> 
+            </div>)
+    },
+
+    calculateTotal: function() {
+        return (this.props.price + this.props.serviceFee + this.props.facilitiesFee) * this.state.quantity;
+    },
+    
     render: function() {
         return (
             <div className="ticketing">
               <div className="row">
                 <div className="large-12 column">
                   <span className="ticket-column-headings" style={{display: 'block'}}>Buy Tickets</span>
-                  <p className="ticket-column-data ticket-restrictions">There is a 10 ticket limit per customer. Service fees are non-refundable.</p>
+                  <p className="ticket-column-data ticket-restrictions" style={{height: 40}}>{ this.props.max_quantity ? "There is a " + this.props.max_quantity + " ticket limit per customer.  " : null }Service fees are non-refundable.</p>
                 </div>
               </div>
               <div className="row">
@@ -24,31 +59,19 @@ var Ticketing = React.createClass({
                     <ul>
                       <li className="large-3 columns">
                         <span className="ticket-column-headings">Item Price</span>
-                        <p className="ticket-price ticket-column-data">$20.00</p>
+                        <p className="ticket-price ticket-column-data">{number.asCurrency(this.props.price)}</p>
                       </li>
                       <li className="large-3 columns">
                         <span className="ticket-column-headings">Service Fee<i className="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></span>
-                        <p className="ticket-service-fee ticket-column-data">$1.53</p>
+                        <p className="ticket-service-fee ticket-column-data">{number.asCurrency(this.props.serviceFee)}</p>
                       </li>
                       <li className="large-3 columns">
                         <span className="ticket-column-headings">Facilities Fee<i className="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></span>
-                        <p className="ticket-facilities-fee ticket-column-data">$1.00</p>
+                        <p className="ticket-facilities-fee ticket-column-data">{number.asCurrency(this.props.facilitiesFee)}</p>
                       </li>
                       <li className="large-3 columns">
                         <span className="ticket-column-headings">Quantity</span>
-                        <select name="ticket-quantity" className="ticket-quantity ticket-column-data">
-                          <option></option>
-                          <option value="1">01</option>
-                          <option value="2">02</option>
-                          <option value="3">03</option>
-                          <option value="4">04</option>
-                          <option value="5">05</option>
-                          <option value="6">06</option>
-                          <option value="7">07</option>
-                          <option value="8">08</option>
-                          <option value="9">09</option>
-                          <option value="10">10</option>
-                        </select>
+                         { this.drawTicketSelect() }
                         <p className="ticket-service-fee ticket-column-data"></p>
                       </li>
                     </ul>
@@ -73,8 +96,14 @@ var Ticketing = React.createClass({
                 </div>
               </div>
               <hr />
+              { this.state.quantity > 0 ? [this.drawTotals(), <hr />] : null }
               <div className="row">
                 <div className="large-12">
+                  <div className="ticket-checkout-row large-4 columns right">
+                    <a href="/youraction" data-paypal-button="true">
+                      <img src="//www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Check out with PayPal" />
+                    </a>
+                  </div>
                   <div className="ticket-checkout-row large-4 columns right">
                     <a href="#" className="ticket-checkout button">CHECKOUT</a>
                   </div>
