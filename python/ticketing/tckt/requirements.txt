@@ -6,3 +6,4 @@ WTForms==2.0.1
 https://github.com/coffin/coffin/tarball/7b5d514238f44fa0fbc30e198b7405d38dacb626
 envelop==0.2.0
 Pillow==2.6.1
+paypalrestsdk==1.8.0

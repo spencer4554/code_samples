@@ -29,3 +29,4 @@ class Event(models.Model):
     date = models.DateField()
     location = models.ForeignKey('event.location')
     image = models.ImageField(upload_to=_image_upload_to)
+    price_per = models.DecimalField(max_digits=6, decimal_places=2)

@@ -100,12 +100,9 @@ var Ticketing = React.createClass({
               <div className="row">
                 <div className="large-12">
                   <div className="ticket-checkout-row large-4 columns right">
-                    <a href="/youraction" data-paypal-button="true">
+                    <a href={ '/payment/paypal_start?event_id=' + this.props.event_id + '&quantity=' + this.state.quantity } data-paypal-button="true">
                       <img src="//www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Check out with PayPal" />
                     </a>
-                  </div>
-                  <div className="ticket-checkout-row large-4 columns right">
-                    <a href="#" className="ticket-checkout button">CHECKOUT</a>
                   </div>
                 </div>
               </div>

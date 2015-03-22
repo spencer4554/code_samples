@@ -8,4 +8,5 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^events/', include('tckt.apps.event.urls', namespace='events')),
+    url(r'^payment/', include('tckt.apps.payment.urls', namespace='payment')),
 )
