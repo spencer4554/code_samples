@@ -41,12 +41,15 @@ var Ticketing = React.createClass({
     },
     
     render: function() {
+        console.log(this.props.price);
+        console.log(this.props.serviceFee);
+        console.log(this.props.facilitiesFee);
         return (
             <div className="ticketing">
               <div className="row">
                 <div className="large-12 column">
                   <span className="ticket-column-headings" style={{display: 'block'}}>Buy Tickets</span>
-                  <p className="ticket-column-data ticket-restrictions" style={{height: 40}}>{ this.props.max_quantity ? "There is a " + this.props.max_quantity + " ticket limit per customer.  " : null }Service fees are non-refundable.</p>
+                  <p className="ticket-column-data ticket-restrictions" style={{height: 40}}>{ this.props.maxQuantity ? "There is a " + this.props.maxQuantity + " ticket limit per customer.  " : null }Service fees are non-refundable.</p>
                 </div>
               </div>
               <div className="row">

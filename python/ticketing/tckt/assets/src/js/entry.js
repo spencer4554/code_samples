@@ -6,9 +6,10 @@ var EventHeader = require("./components/EventHeader");
 var Event = require("./components/Event");
 
 module.exports.getEventHeader = function(event) {
-    return <EventHeader />;
+    return <EventHeader day={event.day} dow={event.dow} month={event.month} presenter={event.presenter} name={event.name} subtitle={event.subtitle} location={event.location} />;
 };
 
 module.exports.getEventDetail = function(event) {
-    return <Event max_quantity={10} price={20} serviceFee={1.53} facilitiesFee={1} />;
+    console.log(event);
+    return <Event event_id={event.id} max_quantity={event.maxQuantity} price={parseFloat(event.price)} serviceFee={parseFloat(event.serviceFee)} facilitiesFee={parseFloat(event.facilitiesFee)} />;
 };

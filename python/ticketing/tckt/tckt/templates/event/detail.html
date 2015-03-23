@@ -165,11 +165,12 @@
     </div>
     </aside>
   </div>
+  <script type="text/javascript" id="event">var current_event = {{event|safe}}</script>
   <script>
    $(function() {
      var eventRender = require('eventRender');
-     var h = eventRender.getEventHeader();
-     var e = eventRender.getEventDetail();
+     var h = eventRender.getEventHeader(current_event);
+     var e = eventRender.getEventDetail(current_event);
      React.render(h, document.getElementById("header-target"));
      React.render(e, document.getElementById("event-target"));
    });

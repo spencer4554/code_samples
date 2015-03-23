@@ -5,6 +5,12 @@ from django.db import models, migrations
 import django.utils.timezone
 import tckt.apps.user.models
 
+def add_admin_user(app, schema_editor):
+    u = tckt.apps.user.models.TcktUser(
+        email='spencer4554@gmail.com')
+    u.set_password('april1')
+    u.save()
+
 
 class Migration(migrations.Migration):
 
@@ -35,4 +41,5 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.RunPython(add_admin_user),
     ]
