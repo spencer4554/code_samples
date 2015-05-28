@@ -9,6 +9,8 @@ def add_admin_user(app, schema_editor):
     u = tckt.apps.user.models.TcktUser(
         email='spencer4554@gmail.com')
     u.set_password('april1')
+    u.is_superuser = 1
+    u.is_staff = 1
     u.save()
 
 

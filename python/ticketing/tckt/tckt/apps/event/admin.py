@@ -6,5 +6,15 @@ from django.contrib import admin
 from .models import Location, Event
 
 
-admin.site.register(Location, admin.ModelAdmin)
+class LocationAdmin(admin.ModelAdmin):
+    list_display = ('business_name',
+                    'line1',
+                    'line2',
+                    'city',
+                    'state',
+                    'zipcode',
+                    'phone')
+
+
+admin.site.register(Location, LocationAdmin)
 admin.site.register(Event, admin.ModelAdmin)

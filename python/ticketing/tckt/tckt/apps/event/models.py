@@ -16,7 +16,7 @@ def _image_upload_to(instance, filename):
 class Location(models.Model):
     business_name = models.CharField(max_length=256)
     line1 = models.CharField(max_length=256)
-    line2 = models.CharField(max_length=256)
+    line2 = models.CharField(max_length=256, null=True, blank=True)
     city = models.CharField(max_length=256)
     state = models.CharField(max_length=2)
     zipcode = models.CharField(max_length=5)

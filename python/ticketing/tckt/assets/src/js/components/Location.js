@@ -16,6 +16,7 @@ var Location = React.createClass({
               </a>
               <div className="location-address">
                 <span>{this.props.line1}</span>
+                { this.props.line2 ? <span>{this.props.line2}</span> : '' }
                 <span>{this.props.city + ", " + this.props.state + " " + this.props.zipcode}</span>
                 <span>{this.props.phone}</span>
               </div>
