@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 
 React = require('react');
-var _ = require("underscore");
+var _ = require('underscore');
 var $ = require('jquery');
 var Ticketing = require('./Ticketing');
 
-var EventHeader = React.createClass({
+var Event = React.createClass({
     render: function() {
         return (
           <article>
@@ -20,12 +20,7 @@ var EventHeader = React.createClass({
                   <div className="row">
                     <div className="large-12 column">
                       <span className="ticket-column-headings">Event Details</span>
-                      <p className="event-details">
-                        <span>The Green live at the Fat Cat Music House and Lounge</span>
-                        <span>Doors at 6PM Show at 7PM</span>
-                        <span>21+ event</span>
-                        <span>For Booth reservations or questions please call 209-312-3463</span>
-                      </p>
+                      <p className="event-details">{this.props.description}</p>
                     </div>
                   </div>
                 </div>
@@ -36,4 +31,4 @@ var EventHeader = React.createClass({
     }
 });
 
-module.exports = EventHeader;
+module.exports = Event;

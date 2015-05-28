@@ -30,7 +30,6 @@ var EventHeader = React.createClass({
           </div>
         );
     }
-
 });
 
 module.exports = EventHeader;

@@ -5,6 +5,7 @@ import datetime
 import json
 
 from django.db import models
+from urllib import quote
 
 
 def _image_upload_to(instance, filename):
@@ -28,7 +29,8 @@ class Location(models.Model):
                 'city': self.city,
                 'state': self.state,
                 'zipcode': self.zipcode,
-                'phone': self.phone}
+                'phone': self.phone,
+                'addr_code': quote(",".join([self.line1, self.city, self.state, self.zipcode]))}
 
 
 class Event(models.Model):
@@ -53,6 +55,7 @@ class Event(models.Model):
                            'presenter': self.presenter,
                            'name': self.name,
                            'subtitle': self.subtitle,
+                           'description': self.description,
                            'dow': self.date.strftime('%a'),
                            'month': self.date.strftime('%b'),
                            'day': self.date.strftime('%d'),
