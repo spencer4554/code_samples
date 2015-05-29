@@ -10,7 +10,7 @@ from urllib import quote
 
 def _image_upload_to(instance, filename):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-    return "event-image/{}/{}/{}.jpg".format(instance.id, timestamp)
+    return "event-image/{}/{}.jpg".format(instance.id, timestamp)
 
 
 class Location(models.Model):
@@ -55,7 +55,8 @@ class Event(models.Model):
                 'dow': self.date.strftime('%a'),
                 'month': self.date.strftime('%b'),
                 'day': self.date.strftime('%d'),
-                'startText': self.start_text}
+                'startText': self.start_text,
+                'image': self.image.url}
 
     def to_json(self):
         data = self.to_dict()

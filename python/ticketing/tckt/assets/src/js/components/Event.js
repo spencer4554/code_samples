@@ -11,7 +11,7 @@ var Event = React.createClass({
           <article>
             <div className="row">
               <div className="large-4 columns">
-                <img src="{% static 'img/thegreen.jpg' %}"/>
+                <img src={ this.props.image }/>
               </div>
               <div className="large-8 columns event-right-column">
                 <Ticketing  {...this.props} />

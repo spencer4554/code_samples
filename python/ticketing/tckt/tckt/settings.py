@@ -96,3 +96,5 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = 'user.TcktUser'
+MEDIA_ROOT = LOCAL_FILE("../media/")
+MEDIA_URL = '/media/'

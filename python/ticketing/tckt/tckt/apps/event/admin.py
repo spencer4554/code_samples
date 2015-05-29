@@ -17,4 +17,13 @@ class LocationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Location, LocationAdmin)
-admin.site.register(Event, admin.ModelAdmin)
+
+
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('name',
+                    'subtitle',
+                    'presenter',
+                    'date')
+
+
+admin.site.register(Event, EventAdmin)
