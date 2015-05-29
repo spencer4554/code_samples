@@ -11,10 +11,11 @@ module.exports.asCurrency = function(num) {
     if (neg) {
         num = num * -1;
     }
-    var str = module.exports.asFormatedString(num.toFixed(2));
+
+    var str = module.exports.asFormatedString(parseFloat(num).toFixed(2));
     str = "$" + str;
     if (neg) {
         str = "(" + str + ")";
     }
     return str;
-};  
+};

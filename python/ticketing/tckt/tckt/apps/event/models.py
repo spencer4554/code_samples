@@ -43,20 +43,33 @@ class Event(models.Model):
     start_text = models.CharField(max_length=100)
     location = models.ForeignKey('event.location')
     image = models.ImageField(upload_to=_image_upload_to)
-    price_per = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def to_dict(self):
+        return {'eventId': self.id,
+                'maxQuantity': 10,
+                'location': self.location.to_dict(),
+                'presenter': self.presenter,
+                'name': self.name,
+                'subtitle': self.subtitle,
+                'description': self.description,
+                'dow': self.date.strftime('%a'),
+                'month': self.date.strftime('%b'),
+                'day': self.date.strftime('%d'),
+                'startText': self.start_text}
 
     def to_json(self):
-        return json.dumps({'id': self.id,
-                           'maxQuantity': 10,
-                           'price': str(self.price_per),
-                           'serviceFee': str('1.53'),
-                           'facilitiesFee': str('1.00'),
-                           'location': self.location.to_dict(),
-                           'presenter': self.presenter,
-                           'name': self.name,
-                           'subtitle': self.subtitle,
-                           'description': self.description,
-                           'dow': self.date.strftime('%a'),
-                           'month': self.date.strftime('%b'),
-                           'day': self.date.strftime('%d'),
-                           'startText': self.start_text})
+        data = self.to_dict()
+        data.update(self.price.to_dict())
+        return json.dumps(data)
+
+
+class EventPrice(models.Model):
+    event = models.OneToOneField(Event, primary_key=True, related_name='price')
+    price_per = models.DecimalField(max_digits=6, decimal_places=2)
+    service_fee = models.DecimalField(max_digits=6, decimal_places=2)
+    facilities_fee = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def to_dict(self):
+        return {'pricePer': str(self.price_per),
+                'serviceFee': str(self.service_fee),
+                'facilitiesFee': str(self.facilities_fee)}

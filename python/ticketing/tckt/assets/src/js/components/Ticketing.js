@@ -32,18 +32,22 @@ var Ticketing = React.createClass({
                 <div className="ticket-header large-2 columns">
                   <p className="ticket-shipping ticket-column-data">{number.asCurrency(this.calculateTotal())}</p>
                 </div>
-              </div> 
+              </div>
             </div>)
     },
 
     calculateTotal: function() {
-        return (this.props.price + this.props.serviceFee + this.props.facilitiesFee) * this.state.quantity;
+        return (parseFloat(this.props.pricePer) + parseFloat(this.props.serviceFee) + parseFloat(this.props.facilitiesFee)) * parseFloat(this.state.quantity);
     },
-    
+
+    onClick: function(event) {
+        if (this.state.quantity == 0) {
+            alert("Please select a quantity before continuing.");
+            event.preventDefault();
+        }
+    },
+
     render: function() {
-        console.log(this.props.price);
-        console.log(this.props.serviceFee);
-        console.log(this.props.facilitiesFee);
         return (
             <div className="ticketing">
               <div className="row">
@@ -62,7 +66,7 @@ var Ticketing = React.createClass({
                     <ul>
                       <li className="large-3 columns">
                         <span className="ticket-column-headings">Item Price</span>
-                        <p className="ticket-price ticket-column-data">{number.asCurrency(this.props.price)}</p>
+                        <p className="ticket-price ticket-column-data">{number.asCurrency(this.props.pricePer)}</p>
                       </li>
                       <li className="large-3 columns">
                         <span className="ticket-column-headings">Service Fee<i className="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></span>
@@ -102,8 +106,8 @@ var Ticketing = React.createClass({
               { this.state.quantity > 0 ? [this.drawTotals(), <hr />] : null }
               <div className="row">
                 <div className="large-12">
-                  <div className="ticket-checkout-row large-4 columns right">
-                    <a href={ '/payment/paypal_start?event_id=' + this.props.event_id + '&quantity=' + this.state.quantity } data-paypal-button="true">
+                  <div className="ticket-checkout-row large-3 columns right">
+                    <a onClick={this.onClick} href={ '/payment/paypal_start?event_id=' + this.props.eventId + '&quantity=' + this.state.quantity } data-paypal-button="true">
                       <img src="//www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Check out with PayPal" />
                     </a>
                   </div>
