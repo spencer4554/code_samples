@@ -67,8 +67,11 @@ class Event(models.Model):
 class EventPrice(models.Model):
     event = models.OneToOneField(Event, primary_key=True, related_name='price')
     price_per = models.DecimalField(max_digits=6, decimal_places=2)
-    service_fee = models.DecimalField(max_digits=6, decimal_places=2)
-    facilities_fee = models.DecimalField(max_digits=6, decimal_places=2)
+    service_fee = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    facilities_fee = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+
+    def total_price(self):
+        return self.price_per + self.service_fee + self.facilities_fee
 
     def to_dict(self):
         return {'pricePer': str(self.price_per),

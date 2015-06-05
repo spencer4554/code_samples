@@ -165,11 +165,14 @@
     </aside>
   </div>
   <script type="text/javascript" id="event">var current_event = {{event|safe}}</script>
+  <script type="text/javascript" id="urls">
+   var urls = { 'urls': { 'payment_start': '{% url payment:start %}' } };
+  </script>
   <script>
    $(function() {
      var eventRender = require('eventRender');
-     var h = eventRender.getEventHeader(current_event);
-     var e = eventRender.getEventDetail(current_event);
+     var h = eventRender.getEventHeader(current_event, urls);
+     var e = eventRender.getEventDetail(current_event, urls);
      React.render(h, document.getElementById("header-target"));
      React.render(e, document.getElementById("event-target"));
    });

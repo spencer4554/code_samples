@@ -11,7 +11,11 @@ var Ticketing = React.createClass({
     },
 
     changeQuantity: function(event) {
-        this.setState({'quantity': event.target.value});
+
+        var quantity = parseFloat(event.target.value),
+            total = ((parseFloat(this.props.pricePer) + parseFloat(this.props.serviceFee) + parseFloat(this.props.facilitiesFee)) * quantity).toFixed(2)
+        this.setState({'quantity': quantity,
+                       'total': total});
     },
 
     drawTicketSelect: function() {
@@ -30,14 +34,10 @@ var Ticketing = React.createClass({
                   <p className="ticket-shipping ticket-column-data">Total:</p>
                 </div>
                 <div className="ticket-header large-2 columns">
-                  <p className="ticket-shipping ticket-column-data">{number.asCurrency(this.calculateTotal())}</p>
+                  <p className="ticket-shipping ticket-column-data">{number.asCurrency(this.state.total)}</p>
                 </div>
               </div>
             </div>)
-    },
-
-    calculateTotal: function() {
-        return (parseFloat(this.props.pricePer) + parseFloat(this.props.serviceFee) + parseFloat(this.props.facilitiesFee)) * parseFloat(this.state.quantity);
     },
 
     onClick: function(event) {
@@ -107,7 +107,7 @@ var Ticketing = React.createClass({
               <div className="row">
                 <div className="large-12">
                   <div className="ticket-checkout-row large-3 columns right">
-                    <a onClick={this.onClick} href={ '/payment/paypal_start?event_id=' + this.props.eventId + '&quantity=' + this.state.quantity } data-paypal-button="true">
+                    <a onClick={this.onClick} href={ this.props.urls.payment_start + '?event_id=' + this.props.eventId + '&quantity=' + this.state.quantity + "&amount=" + this.state.total} data-paypal-button="true">
                       <img src="//www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Check out with PayPal" />
                     </a>
                   </div>

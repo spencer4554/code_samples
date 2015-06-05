@@ -58,6 +58,10 @@ The response should be this:
 """"""
 
 
+def get_total(event, num_tickets):
+    return event.price.total_price() * num_tickets
+
+
 def create_paypal_payment(amount, return_url, cancel_url):
     paypal_login()
     payment = paypalrestsdk.Payment({
@@ -69,16 +73,16 @@ def create_paypal_payment(amount, return_url, cancel_url):
         },
         "transactions": [{
             "amount": {
-                "total": "12",
+                "total": amount,
                 "currency": "USD"
             },
             "description": "creating a payment"
         }]
     })
-    
-    response = payment.create()
 
-    find_href = lambda rel: [x['href'] for x in response['links'] if x['rel'] == rel][0]
+    payment.create()
+
+    find_href = lambda rel: [x['href'] for x in payment['links'] if x['rel'] == rel][0]
 
     return {'approval_url': find_href('approval_url'),
             'execute_url': find_href('execute'),
