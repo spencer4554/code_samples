@@ -3,10 +3,9 @@ from __future__ import unicode_literals
 
 from coffin.shortcuts import render
 from .models import Event
+from .utils import get_event_context
 
 
 def detail(request):
-    e = Event.objects.all().first()
-    context = {'event': e.to_json(),
-               'title': e.name}
-    return render(request, "event/detail.html", context)
+    event = Event.objects.all().first()
+    return render(request, "event/detail.html", get_event_context(event))

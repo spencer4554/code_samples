@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     # Our own apps
     'tckt.apps.user',
     'tckt.apps.event',
+    'tckt.apps.payment',
 )
 
 MIDDLEWARE_CLASSES = (

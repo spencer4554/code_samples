@@ -7,23 +7,39 @@ var number = require('../utils/number');
 
 var Ticketing = React.createClass({
     getInitialState: function() {
-        return {'quantity': 0}
+        if (!_.isEmpty(this.props.transaction)) {
+            return {'quantity': this.props.transaction.quantity,
+                    'total': this.calculateTotal(this.props.transaction.quantity)};
+        } else {
+            return {'quantity': 0,
+                    'total': 0};
+        }
+    },
+
+    calculateTotal: function(quantity) {
+        return ((parseFloat(this.props.pricePer) + parseFloat(this.props.serviceFee) + parseFloat(this.props.facilitiesFee)) * quantity).toFixed(2);
     },
 
     changeQuantity: function(event) {
-
-        var quantity = parseFloat(event.target.value),
-            total = ((parseFloat(this.props.pricePer) + parseFloat(this.props.serviceFee) + parseFloat(this.props.facilitiesFee)) * quantity).toFixed(2)
+        var quantity = parseFloat(event.target.value);
         this.setState({'quantity': quantity,
-                       'total': total});
+                       'total': this.calculateTotal(quantity)});
     },
 
     drawTicketSelect: function() {
-        return (
-            <select onChange={this.changeQuantity} name="ticket-quantity" className="ticket-quantity ticket-column-data" style={{marginTop: 10}}>
-              <option>Select #</option>
-              { _.map(_.range(10), function(i) { return <option value={i+1}>{i+1}</option> }) }
-            </select>)
+        if (!_.isEmpty(this.props.transaction)) {
+            return <p className="ticket-service-fee ticket-column-data">{this.state.quantity}</p>;
+        } else {
+            return (
+                <div>
+                  <select onChange={this.changeQuantity} name="ticket-quantity" className="ticket-quantity ticket-column-data" style={{marginTop: 10}}>
+                    <option>Select #</option>
+                    { _.map(_.range(10), function(i) { return <option value={i+1}>{i+1}</option> })};
+                  </select>
+                  <p className="ticket-service-fee ticket-column-data"></p>
+                </div>
+            );
+        }
     },
 
     drawTotals: function() {
@@ -37,13 +53,28 @@ var Ticketing = React.createClass({
                   <p className="ticket-shipping ticket-column-data">{number.asCurrency(this.state.total)}</p>
                 </div>
               </div>
-            </div>)
+            </div>);
     },
 
     onClick: function(event) {
-        if (this.state.quantity == 0) {
+        if (this.state.quantity === 0) {
             alert("Please select a quantity before continuing.");
             event.preventDefault();
+        }
+    },
+
+    drawPurchaseButton: function() {
+        if (this.props.showPurchase) {
+            return <div className="large-4 right ticketing-order-button-holder">
+                     <a href="#" className="button order-button" onClick={this.props.purchase}>Place Your Order</a>
+                   </div>;
+        } else {
+            return (
+                <div className="ticket-checkout-row large-3 columns right">
+                  <a onClick={this.onClick} href={ this.props.urls.payment_start + '?event_id=' + this.props.eventId + '&quantity=' + this.state.quantity + "&amount=" + this.state.total} data-paypal-button="true">
+                    <img src="//www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Check out with PayPal" />
+                  </a>
+                </div>);
         }
     },
 
@@ -79,7 +110,6 @@ var Ticketing = React.createClass({
                       <li className="large-3 columns">
                         <span className="ticket-column-headings">Quantity</span>
                          { this.drawTicketSelect() }
-                        <p className="ticket-service-fee ticket-column-data"></p>
                       </li>
                     </ul>
                   </div>
@@ -106,11 +136,7 @@ var Ticketing = React.createClass({
               { this.state.quantity > 0 ? [this.drawTotals(), <hr />] : null }
               <div className="row">
                 <div className="large-12">
-                  <div className="ticket-checkout-row large-3 columns right">
-                    <a onClick={this.onClick} href={ this.props.urls.payment_start + '?event_id=' + this.props.eventId + '&quantity=' + this.state.quantity + "&amount=" + this.state.total} data-paypal-button="true">
-                      <img src="//www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Check out with PayPal" />
-                    </a>
-                  </div>
+                  { this.drawPurchaseButton() }
                 </div>
               </div>
             </div>

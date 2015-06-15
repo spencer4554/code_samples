@@ -10,6 +10,8 @@ module.exports.getEventHeader = function(event, urls) {
     return <EventHeader {..._.extend(event, urls)} />;
 };
 
-module.exports.getEventDetail = function(event, urls) {
-    return <Event {..._.extend(event, urls)} />;
+module.exports.getEventDetail = function(event, urls, transaction) {
+    var props = _.extend(event, urls);
+    props['transaction'] = transaction;
+    return <Event {...props} />;
 };

@@ -21,6 +21,8 @@ class Location(models.Model):
     state = models.CharField(max_length=2)
     zipcode = models.CharField(max_length=5)
     phone = models.CharField(max_length=15)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def to_dict(self):
         return {'name': self.business_name,
@@ -39,10 +41,12 @@ class Event(models.Model):
     short_description = models.CharField(max_length=512)
     description = models.CharField(max_length=4096)
     presenter = models.CharField(max_length=256)
-    date = models.DateField()
+    date = models.DateTimeField()
     start_text = models.CharField(max_length=100)
     location = models.ForeignKey('event.location')
     image = models.ImageField(upload_to=_image_upload_to)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def to_dict(self):
         return {'eventId': self.id,
@@ -55,6 +59,7 @@ class Event(models.Model):
                 'dow': self.date.strftime('%a'),
                 'month': self.date.strftime('%b'),
                 'day': self.date.strftime('%d'),
+                'datetime': self.date.strftime('%-d %b %Y %-I:%M%p'),
                 'startText': self.start_text,
                 'image': self.image.url}
 
@@ -69,6 +74,8 @@ class EventPrice(models.Model):
     price_per = models.DecimalField(max_digits=6, decimal_places=2)
     service_fee = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     facilities_fee = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def total_price(self):
         return self.price_per + self.service_fee + self.facilities_fee

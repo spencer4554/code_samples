@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^events/', include('tckt.apps.event.urls', namespace='events')),
+    url(r'^events/', include('tckt.apps.event.urls', namespace='event')),
     url(r'^payment/', include('tckt.apps.payment.urls', namespace='payment')),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
