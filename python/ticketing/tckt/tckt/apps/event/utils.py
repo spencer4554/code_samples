@@ -4,4 +4,5 @@ from __future__ import unicode_literals
 
 def get_event_context(event):
     return {'event': event.to_json(),
-            'title': event.name}
+            'title': event.name,
+            'slug': event.slug}

@@ -9,7 +9,18 @@ var OrderSummary = require('./OrderSummary');
 var Event = React.createClass({
 
     getInitialState: function() {
-        return {'orderSummaryOpen': !_.isEmpty(this.props.transaction)};
+        var orderSummaryOpen = false, orderError = false;
+
+        if (!_.isEmpty(this.props.transaction)) {
+            if (this.props.transaction.status == 'paypal_error') {
+                orderError = true;
+            } else {
+                orderSummaryOpen = true;
+            }
+        }
+
+        return {'orderSummaryOpen': orderSummaryOpen,
+                'orderError': orderError};
     },
 
     closeOrderSummaryOverlay: function() {
@@ -17,7 +28,12 @@ var Event = React.createClass({
     },
 
     purchase: function() {
-        alert("ORDER PLACED");
+        var url = this.props.urls.payment_execute + "?paymentId=" + this.props.transaction.processor_payment_id;
+        window.location.href = url;
+    },
+
+    clear: function() {
+        window.location.href = this.props.urls.restart;
     },
 
     drawTicketing: function() {
@@ -39,11 +55,25 @@ var Event = React.createClass({
         return <OrderSummary {...props} />;
     },
 
+    drawOrderError: function() {
+        if (!this.state.orderError) {
+            return '';
+        }
+
+        return (
+          <div className="large-12 columns">
+              <div data-alert className="alert-box alert radius">
+                Paypal returned an error.  <a onClick={ this.purchase }>Retry your payment</a> or <a onClick={ this.clear }>start again.</a>
+            </div>
+          </div>);
+    },
+
     render: function() {
         return (
           <div>
             <article>
               <div className="row">
+                { this.drawOrderError() }
                 <div className="large-4 columns">
                   <img src={ this.props.image }/>
                 </div>

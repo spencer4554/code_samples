@@ -2,17 +2,26 @@
 from __future__ import unicode_literals
 
 from django.db import models
+
 import json
+import random
 
 STATUSES = [('started', 'started'),
             ('paypal_returned', 'paypal_returned'),
             ('paypal_expired', 'paypal_expired'),
+            ('paypal_error', 'paypal_error'),
             ('canceled', 'canceled'),
             ('completed', 'completed'),
             ('refunded', 'refunded')]
 
 
+def _get_uid():
+    chars = "abcdef0123456789"
+    return ''.join(random.choice(chars) for _ in range(8))
+
+
 class Transaction(models.Model):
+    uid = models.CharField(max_length=8, default=_get_uid, unique=True)
     processor_payment_id = models.CharField(max_length=50)
     event = models.ForeignKey('event.Event')
     quantity = models.IntegerField()
@@ -24,7 +33,8 @@ class Transaction(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def to_dict(self):
-        return {'processor_payment_id': self.processor_payment_id,
+        return {'order_number': self.uid,
+                'processor_payment_id': self.processor_payment_id,
                 'event': self.event.to_dict(),
                 'quantity': self.quantity,
                 'amount': self.amount,

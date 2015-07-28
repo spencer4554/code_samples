@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import paypalrestsdk
 from .models import Transaction, TransactionUser
 from tckt.apps.event.models import Location
+from urlparse import urlparse, parse_qsl
 
 
 class PaymentNotFoundError(Exception):
@@ -69,12 +70,22 @@ def get_total(event, num_tickets):
 
 
 def create_transaction(event, quantity, payment):
+    token = None
+
+    for link in payment.to_dict()['links']:
+        if link['rel'] == 'approval_url':
+            qs = urlparse(link['href']).query
+            for t in parse_qsl(qs):
+                if t[0] == 'token':
+                    token = t[1]
+
     d = payment.to_dict()
     return Transaction.objects.create(
         processor_payment_id=d['id'],
         event=event,
         quantity=quantity,
         amount=d['transactions'][0]['amount']['total'],
+        token=token,
         status='started')
 
 
@@ -111,17 +122,17 @@ def get_payment(payment_id):
     paypal_login()
     payment = paypalrestsdk.Payment.find(payment_id)
 
-    data = payment.to_dict()
-
-    if data == {}:
+    if payment.to_dict() == {}:
         raise PaymentNotFoundError()
 
-    return data
+    return payment
 
 
-def update_transaction(transaction, token, payment_data):
+def update_transaction(transaction, token, payment):
     transaction.status = 'paypal_returned'
     transaction.token = token
+
+    payment_data = payment.to_dict()
 
     payer_info = payment_data['payer']['payer_info']
 
@@ -132,8 +143,6 @@ def update_transaction(transaction, token, payment_data):
         u = TransactionUser()
         u.payer_id = payer_info['payer_id']
         shipping_address = Location()
-
-    transaction.user = u
 
     u.email = payer_info['email']
     u.first_name = payer_info['first_name']
@@ -149,9 +158,27 @@ def update_transaction(transaction, token, payment_data):
     shipping_address.save()
     u.shipping_address = shipping_address
     u.save()
+    transaction.user = u
     transaction.save()
 
 
 def mark_transaction_expired(transaction):
+    assert transaction.status != 'completed'
     transaction.status = 'paypal_expired'
+    transaction.save()
+
+
+def mark_transaction_error(transaction):
+    assert transaction.status != 'completed'
+    transaction.status = 'paypal_error'
+    transaction.save()
+
+
+def mark_transaction_successful(transaction):
+    transaction.status = 'completed'
+    transaction.save()
+
+
+def mark_transaction_canceled(transaction):
+    transaction.status = 'canceled'
     transaction.save()

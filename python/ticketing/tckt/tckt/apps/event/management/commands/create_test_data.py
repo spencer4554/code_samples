@@ -28,6 +28,7 @@ class Command(BaseCommand):
             phone='9173068629')
 
         e1 = Event.objects.create(
+            slug='the-green',
             name="The Green",
             subtitle="Yo man whats up",
             short_description="This be the short description yo",

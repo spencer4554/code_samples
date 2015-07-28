@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 #import paypalrestsdk
 
+import logging
 from decimal import Decimal
 from coffin.shortcuts import render
 from django.core.urlresolvers import reverse
@@ -13,7 +14,10 @@ from .utils import (create_paypal_payment,
                     update_transaction,
                     get_payment,
                     PaymentNotFoundError,
-                    mark_transaction_expired)
+                    mark_transaction_expired,
+                    mark_transaction_successful,
+                    mark_transaction_error,
+                    mark_transaction_canceled)
 from .models import Transaction
 from tckt.apps.event.models import Event
 from tckt.apps.event.utils import get_event_context
@@ -31,11 +35,13 @@ def paypal_start(request):
     if amount != Decimal(request.REQUEST.get('amount', '0')):
         raise PaymentNotEqualError()
 
+    cancel = "{}?event_slug={}".format(reverse('payment:cancel'), event.slug)
+
     payment_urls = create_paypal_payment(event,
                                          quantity,
                                          amount,
                                          return_url=request.build_absolute_uri(reverse('payment:record')),
-                                         cancel_url=request.build_absolute_uri(reverse('payment:cancel')))
+                                         cancel_url=request.build_absolute_uri(cancel))
 
     set_session_data(payment_urls, request)
 
@@ -104,18 +110,37 @@ def paypal_record(request):
 
 
 def paypal_execute(request):
-    payment = get_payment(request.REQUEST['paymentId'])
-    transaction = update_transaction(payment, request.REQUEST['token'])
-    import logging
     logger = logging.getLogger(__name__)
+    transaction = Transaction.objects.get(processor_payment_id=request.REQUEST['paymentId'])
+    payment = get_payment(request.REQUEST['paymentId'])
 
-    if payment.execute({"payer_id": "DUFRQ8GWYMJXC"}):
+    if payment.execute({'payer_id': payment.to_dict()['payer']['payer_info']['payer_id']}):
+        mark_transaction_successful(transaction)
         logger.critical("Payment execute successfully")
-    else:
-        logger.critical(payment.error)  # Error Hash
 
-    return render(request, "event/reciept.html", {'transaction': transaction.to_json()})
+    if transaction.status == 'completed':
+        return redirect("{}?paymentId={}".format(reverse('payment:receipt'), request.REQUEST['paymentId']))
+
+    mark_transaction_error(transaction)
+    logger.critical(payment.error)  # Error Hash
+
+    context = get_event_context(transaction.event)
+    context['transaction'] = transaction.to_json()
+
+    return render(request, "event/detail.html", context)
 
 
 def paypal_cancel(request):
-    return redirect(reverse('event:detail'))
+    try:
+        t = Transaction.objects.get(token=request.REQUEST['token'])
+        mark_transaction_canceled(t)
+    except Transaction.DoesNotExist:
+        pass
+    return redirect(reverse('event:detail', args=[request.REQUEST['event_slug']]))
+
+
+def receipt(request):
+    transaction = Transaction.objects.get(processor_payment_id=request.REQUEST['paymentId'])
+    context = get_event_context(transaction.event)
+    context['transaction'] = transaction.to_json()
+    return render(request, "payment/receipt.html", context)

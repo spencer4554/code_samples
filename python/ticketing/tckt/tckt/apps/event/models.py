@@ -38,6 +38,7 @@ class Location(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=60)
     subtitle = models.CharField(max_length=256)
+    slug = models.CharField(max_length=100, unique=True)
     short_description = models.CharField(max_length=512)
     description = models.CharField(max_length=4096)
     presenter = models.CharField(max_length=256)
@@ -49,7 +50,11 @@ class Event(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def to_dict(self):
+        def suffix(d):
+            return 'th' if 11 <= d <= 13 else {1: 'st', 2: 'nd', 3: 'rd'}.get(int(d) % 10, 'th')
+
         return {'eventId': self.id,
+                'slug': self.slug,
                 'maxQuantity': 10,
                 'location': self.location.to_dict(),
                 'presenter': self.presenter,
@@ -59,7 +64,7 @@ class Event(models.Model):
                 'dow': self.date.strftime('%a'),
                 'month': self.date.strftime('%b'),
                 'day': self.date.strftime('%d'),
-                'datetime': self.date.strftime('%-d %b %Y %-I:%M%p'),
+                'datetime': self.date.strftime('%B %-d{} %Y, %-I:%M %p').format(suffix(self.date.strftime('%-d'))),
                 'startText': self.start_text,
                 'image': self.image.url}
 

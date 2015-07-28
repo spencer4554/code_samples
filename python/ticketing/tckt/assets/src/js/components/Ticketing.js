@@ -16,6 +16,17 @@ var Ticketing = React.createClass({
         }
     },
 
+    componentDidMount: function() {
+        this.handler = StripeCheckout.configure({
+            key: 'pk_test_HG2A1tfa1fy90WFx8j28C9IB',
+            image: '/img/documentation/checkout/marketplace.png',
+            token: function(token) {
+                // Use the token to create the charge with a server-side script.
+                // You can access the token ID with `token.id`
+            }
+        });
+    },
+
     calculateTotal: function(quantity) {
         return ((parseFloat(this.props.pricePer) + parseFloat(this.props.serviceFee) + parseFloat(this.props.facilitiesFee)) * quantity).toFixed(2);
     },
@@ -56,14 +67,32 @@ var Ticketing = React.createClass({
             </div>);
     },
 
-    onClick: function(event) {
+    paypalOnClick: function(event) {
         if (this.state.quantity === 0) {
             alert("Please select a quantity before continuing.");
             event.preventDefault();
         }
     },
 
+    stripeOnClick: function(event) {
+        event.preventDefault();
+
+        if (this.state.quantity === 0) {
+            alert("Please select a quantity before continuing.");
+            return
+        }
+
+        this.handler.open({
+            name: 'HoneyBadgerTix',
+            description: this.state.quantity + ' tickets',
+            amount: this.state.total * 100
+        });
+    },
+
     drawPurchaseButton: function() {
+        var description = this.state.quantity + " tickets ($" + this.state.total + ")";
+        return <button onClick={this.stripeOnClick} id="customButton">Purchase</button>;
+
         if (this.props.showPurchase) {
             return <div className="large-4 right ticketing-order-button-holder">
                      <a href="#" className="button order-button" onClick={this.props.purchase}>Place Your Order</a>
@@ -71,7 +100,7 @@ var Ticketing = React.createClass({
         } else {
             return (
                 <div className="ticket-checkout-row large-3 columns right">
-                  <a onClick={this.onClick} href={ this.props.urls.payment_start + '?event_id=' + this.props.eventId + '&quantity=' + this.state.quantity + "&amount=" + this.state.total} data-paypal-button="true">
+                  <a onClick={this.paypalOnClick} href={ this.props.urls.payment_start + '?event_id=' + this.props.eventId + '&quantity=' + this.state.quantity + "&amount=" + this.state.total} data-paypal-button="true">
                     <img src="//www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Check out with PayPal" />
                   </a>
                 </div>);
