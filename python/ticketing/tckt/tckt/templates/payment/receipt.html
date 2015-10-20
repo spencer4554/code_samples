@@ -11,8 +11,8 @@
   <script type="text/javascript" id="event">var current_event = {{event|safe}}</script>
   <script type="text/javascript" id="urls">
    var urls = { 'urls': { 'restart': {% url event:detail slug %},
-                          'payment_start': '{% url payment:start %}',
-                          'payment_execute': '{% url payment:execute %}'} };
+                          'payment_start': '{% url payment:start_paypal %}',
+                          'payment_execute': '{% url payment:execute_paypal %}'} };
   </script>
   <script type="text/javascript" id="transaction">
    {% if transaction %}

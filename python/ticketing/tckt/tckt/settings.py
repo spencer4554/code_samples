@@ -13,6 +13,7 @@ env = Environment()
 SECRET_KEY = '8y2v7mq%foapmsuftqu#)_muync$+x7$$n7$3!66kwblvh40%w'
 
 DEBUG = True
+PRODUCTION = False
 
 LOCAL_FILE = lambda *parts: join(abspath(dirname(__file__)), *parts)
 
@@ -99,3 +100,11 @@ AUTHENTICATION_BACKENDS = (
 AUTH_USER_MODEL = 'user.TcktUser'
 MEDIA_ROOT = LOCAL_FILE("../media/")
 MEDIA_URL = '/media/'
+
+# paulprior@Yahoo.com keys
+if PRODUCTION:
+    STRIPE_SECRET_KEY = 'sk_live_ixqePIx63LfV0F9V8t5DCq9I'
+    STRIPE_PUBLISHABLE_KEY = 'pk_live_1LAUjeAbVG9SvgVKJMJGAmY0'
+else:
+    STRIPE_SECRET_KEY = 'sk_test_IMO4oUalAc2BaLy3im5fnl6X'
+    STRIPE_PUBLISHABLE_KEY = 'pk_test_HG2A1tfa1fy90WFx8j28C9IB'

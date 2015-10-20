@@ -35,12 +35,12 @@ def paypal_start(request):
     if amount != Decimal(request.REQUEST.get('amount', '0')):
         raise PaymentNotEqualError()
 
-    cancel = "{}?event_slug={}".format(reverse('payment:cancel'), event.slug)
+    cancel = "{}?event_slug={}".format(reverse('payment:cancel_paypal'), event.slug)
 
     payment_urls = create_paypal_payment(event,
                                          quantity,
                                          amount,
-                                         return_url=request.build_absolute_uri(reverse('payment:record')),
+                                         return_url=request.build_absolute_uri(reverse('payment:record_paypal')),
                                          cancel_url=request.build_absolute_uri(cancel))
 
     set_session_data(payment_urls, request)
@@ -137,6 +137,20 @@ def paypal_cancel(request):
     except Transaction.DoesNotExist:
         pass
     return redirect(reverse('event:detail', args=[request.REQUEST['event_slug']]))
+
+
+def stripe_execute(request):
+    quantity = int(request.REQUEST.get('quantity', '0'))
+    event = get_object_or_404(Event, pk=request.REQUEST.get('event_id'))
+    amount = get_total(event, quantity)
+
+    if amount != Decimal(request.REQUEST.get('amount', '0')):
+        raise PaymentNotEqualError()
+
+    request.REQUEST.get('token')
+    request.REQUEST.get('email')
+
+    return None
 
 
 def receipt(request):

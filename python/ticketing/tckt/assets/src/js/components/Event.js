@@ -4,6 +4,7 @@ React = require('react');
 var _ = require('underscore');
 var $ = require('jquery');
 var Ticketing = require('./Ticketing');
+var CreditCard = require('./CreditCard');
 var OrderSummary = require('./OrderSummary');
 
 var Event = React.createClass({
@@ -19,16 +20,20 @@ var Event = React.createClass({
             }
         }
 
-        return {'orderSummaryOpen': orderSummaryOpen,
+        return {'showCreditCard': true,
+                'quantity': 1,
+                'total': 1,
+                'orderSummaryOpen': orderSummaryOpen,
                 'orderError': orderError};
     },
 
     closeOrderSummaryOverlay: function() {
-        this.setState({orderSummaryOpen: false});
+        this.setState({orderSummaryOpen: false,
+                       showCreditCard: false});
     },
 
     purchase: function() {
-        var url = this.props.urls.payment_execute + "?paymentId=" + this.props.transaction.processor_payment_id;
+        var url = this.props.urls.execute_paypal + "?paymentId=" + this.props.transaction.processor_payment_id;
         window.location.href = url;
     },
 
@@ -36,10 +41,27 @@ var Event = React.createClass({
         window.location.href = this.props.urls.restart;
     },
 
+    drawCreditCard: function() {
+        var props = _.clone(this.props);
+        props.quantity = this.state.quantity;
+        props.total = this.state.total;
+        props.close = this.closeOrderSummaryOverlay;
+        return <CreditCard {...props} />;
+    },
+
+    showCreditCard: function(quantity, total) {
+        this.setState({
+            'showCreditCard': true,
+            'quantity': quantity,
+            'total': total
+        });
+    },
+
     drawTicketing: function() {
         var props = this.props;
         props.showPurchase = !_.isEmpty(this.props.transaction);
         props.purchase = this.purchase;
+        props.showCreditCard = this.showCreditCard;
         return <Ticketing  {...props} />;
     },
 
@@ -78,7 +100,7 @@ var Event = React.createClass({
                   <img src={ this.props.image }/>
                 </div>
                 <div className="large-8 columns event-right-column">
-                  { this.drawTicketing() }
+                  { this.state.showCreditCard ? this.drawCreditCard() : this.drawTicketing() }
                   <br />
                   <div className="event-detail">
                     <div className="row">

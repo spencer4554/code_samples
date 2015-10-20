@@ -8,14 +8,16 @@ var Event = require("./components/Event");
 var Receipt = require("./components/Receipt");
 
 
-module.exports.getEventHeader = function(event, urls) {
+module.exports.getEventHeader = function(event, urls, stripe) {
     var props = _.extend(event, urls);
+    props.stripe = stripe;
     return <EventHeader {...props} />;
 };
 
-module.exports.getEventDetail = function(event, urls, transaction) {
+module.exports.getEventDetail = function(event, urls, transaction, stripe) {
     var props = _.extend(event, urls);
     props.transaction = transaction;
+    props.stripe = stripe;
     return <Event {...props} />;
 };
 
