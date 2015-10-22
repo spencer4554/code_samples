@@ -20,7 +20,7 @@ var Event = React.createClass({
             }
         }
 
-        return {'showCreditCard': true,
+        return {'showCreditCard': false,
                 'quantity': 1,
                 'total': 1,
                 'orderSummaryOpen': orderSummaryOpen,
@@ -58,7 +58,7 @@ var Event = React.createClass({
     },
 
     drawTicketing: function() {
-        var props = this.props;
+        var props = _.clone(this.props);
         props.showPurchase = !_.isEmpty(this.props.transaction);
         props.purchase = this.purchase;
         props.showCreditCard = this.showCreditCard;

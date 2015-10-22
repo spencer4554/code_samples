@@ -16,16 +16,6 @@ var Ticketing = React.createClass({
         }
     },
 
-    componentDidMount: function() {
-        this.handler = StripeCheckout.configure({
-            key: 'pk_test_HG2A1tfa1fy90WFx8j28C9IB',
-            image: '/img/documentation/checkout/marketplace.png',
-            token: function(token) {
-                window.location.href = this.props.urls.execute_stripe + '?';
-            }
-        });
-    },
-
     calculateTotal: function(quantity) {
         return ((parseFloat(this.props.pricePer) + parseFloat(this.props.serviceFee) + parseFloat(this.props.facilitiesFee)) * quantity).toFixed(2);
     },
@@ -44,7 +34,7 @@ var Ticketing = React.createClass({
                 <div>
                   <select onChange={this.changeQuantity} name="ticket-quantity" className="ticket-quantity ticket-column-data" style={{marginTop: 10}}>
                     <option>Select #</option>
-                    { _.map(_.range(10), function(i) { return <option value={i+1}>{i+1}</option> })};
+                    { _.map(_.range(10), function(i) { return <option key={"option_" + i} value={i+1}>{i+1}</option> })};
                   </select>
                   <p className="ticket-service-fee ticket-column-data"></p>
                 </div>
