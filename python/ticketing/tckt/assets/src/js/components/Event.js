@@ -62,7 +62,7 @@ var Event = React.createClass({
         props.showPurchase = !_.isEmpty(this.props.transaction);
         props.purchase = this.purchase;
         props.showCreditCard = this.showCreditCard;
-        return <Ticketing  {...props} />;
+        return <Ticketing {...props} />;
     },
 
     drawOrderSummaryOverlay: function() {

@@ -4,8 +4,10 @@ from __future__ import unicode_literals
 #import paypalrestsdk
 
 import logging
+import stripe
 from decimal import Decimal
 from coffin.shortcuts import render
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, redirect
 
@@ -139,6 +141,10 @@ def paypal_cancel(request):
     return redirect(reverse('event:detail', args=[request.REQUEST['event_slug']]))
 
 
+def stripe_save_token(request):
+    pass
+
+
 def stripe_execute(request):
     quantity = int(request.REQUEST.get('quantity', '0'))
     event = get_object_or_404(Event, pk=request.REQUEST.get('event_id'))
@@ -147,8 +153,18 @@ def stripe_execute(request):
     if amount != Decimal(request.REQUEST.get('amount', '0')):
         raise PaymentNotEqualError()
 
-    request.REQUEST.get('token')
-    request.REQUEST.get('email')
+    token = request.REQUEST.get('token')
+    email = request.REQUEST.get('email')
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    charge = stripe.Charge.create(
+        amount=amount*100,
+        currency="usd",
+        source="tok_17iDZq2eZvKYlo2Cd59U369W", # obtained with Stripe.js
+        description="Charge for test@example.com"
+    )
+
+    print("{} {} {}".format(token, charge, email))
 
     return None
 

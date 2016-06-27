@@ -1,9 +1,10 @@
 Django==1.7
 Jinja2==2.7.3
 MySQL-python==1.2.5
-django-custom-user==0.5
-WTForms==2.0.1
-https://github.com/coffin/coffin/tarball/7b5d514238f44fa0fbc30e198b7405d38dacb626
-envelop==0.2.0
 Pillow==2.6.1
+WTForms==2.0.1
+django-custom-user==0.5
+envelop==0.2.0
+https://github.com/coffin/coffin/tarball/7b5d514238f44fa0fbc30e198b7405d38dacb626
 paypalrestsdk==1.8.0
+stripe==1.30.0

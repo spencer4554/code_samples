@@ -76,21 +76,15 @@ var Ticketing = React.createClass({
 
     drawPurchaseButton: function() {
         var description = this.state.quantity + " tickets ($" + this.state.total + ")";
-        return <div className="large-3 columns right ticketing-order-button-holder">
-                   <button className="stripe-button-el" onClick={this.stripeOnClick} id="customButton">Purchase</button>
-               </div>;
 
         if (this.props.showPurchase) {
             return <div className="large-4 right ticketing-order-button-holder">
                      <a href="#" className="button order-button" onClick={this.props.purchase}>Place Your Order</a>
                    </div>;
         } else {
-            return (
-                <div className="ticket-checkout-row large-3 columns right">
-                  <a onClick={this.paypalOnClick} href={ this.props.urls.start_paypal + '?event_id=' + this.props.eventId + '&quantity=' + this.state.quantity + "&amount=" + this.state.total} data-paypal-button="true">
-                    <img src="//www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Check out with PayPal" />
-                  </a>
-                </div>);
+            return <div className="large-3 columns right ticketing-order-button-holder">
+                     <button className="stripe-button-el" onClick={this.stripeOnClick} id="customButton">Proceed</button>
+                   </div>;
         }
     },
 

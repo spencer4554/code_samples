@@ -27,6 +27,7 @@ var CreditCard = React.createClass({
             'name': null,
             'number': null,
             'cvc': null,
+            'email': null,
             'exp_month': null,
             'exp_year': null,
             'address_line1': null,
@@ -35,9 +36,10 @@ var CreditCard = React.createClass({
             'address_state': null,
             'address_zip': null,
             'address_country': 'USA',
+            'errorMessage': null
             'errors': {},
             'defaultsCleared': [],
-            'errorMessage': null
+            'phone': null,
         };
     },
 
@@ -93,7 +95,7 @@ var CreditCard = React.createClass({
     },
 
     checkState: function() {
-        var RequiredFields = ['name', 'number', 'cvc', 'exp_month', 'exp_year', 'address_line1', 'address_city', 'address_state', 'address_zip'];
+        var RequiredFields = ['name', 'number', 'cvc', 'exp_month', 'exp_year', 'address_line1', 'address_city', 'address_state', 'address_zip', 'email', 'phone'];
         this.errors = {};
 
         _.each(RequiredFields, this.check);
@@ -121,9 +123,64 @@ var CreditCard = React.createClass({
         Stripe.card.createToken(stripe_data, this.stripeResponseHandler);
     },
 
+    // Object {id: "tok_17klT4BRRt7xpyGJ2ZhRitPb",
+    //         object: "token",
+    //         client_ip: "108.27.20.60"}
+    // card:
+    //     address_city: "Great Neck"
+    //     address_country: "USA"
+    //     address_line1: "19 Allenwood Rd"
+    //     address_line1_check: "unchecked"
+    //     address_line2: null
+    //     address_state: "NY"
+    //     address_zip: "11023"
+    //     address_zip_check: "unchecked"
+    //     brand: "Visa"
+    //     country: "US"
+    //     cvc_check: "unchecked"
+    //     dynamic_last4: null
+    //     exp_month: 4
+    //     exp_year: 2018
+    //     funding: "unknown"
+    //     id: "card_17klT4BRRt7xpyGJaiqc5N5R"
+    //     last4: "1111"
+    //     metadata: Object
+    //     name: "Paul Prior"
+    //     object: "card"
+    //     tokenization_method: null
+    //     __proto__: Object
+    //     client_ip: "108.27.20.60"
+    //     created: 1456969290
+    //     id: "tok_17klT4BRRt7xpyGJ2ZhRitPb"
+    //     livemode: false
+    //     object: "token"
+    //     type: "card"
+    //     used: false
     stripeResponseHandler: function(status, response) {
         if (status == 200) {
-            debugger;
+            $.ajax({
+                url: this.props.urls.start_stripe,
+                data: {
+                    email: this.state.email,
+                    phone: this.state.phone,
+                    name: response.card.name,
+                    token: response.id,
+                    address_state: response.card.address_state,
+                    address_zip: response.card.address_zip,
+                    address_city: response.card.address_city,
+                    address_line1: response.card.address_line1,
+                    address_line2: response.card.address_line2,
+                    },
+                dataType: 'json',
+                cache: false,
+                success: function(data) {
+                    this.props.setTransaction({transaction: data.transaction});
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.urls.start_stripe, status, err.toString());
+                }.bind(this)
+            });
+            this.props.close();
         } else if (status >= 400 || status < 500) {
             changes = {'errorMessage': response.error.message,
                 'errors': {}};
@@ -147,7 +204,7 @@ var CreditCard = React.createClass({
               <hr />
               <div className="row">
                 <div className="large-12 columns" style={{ 'paddingRight': 30, 'paddingTop': 10 }}>
-                  <button onClick={this.handleSubmit} style={{'float': 'right'}}>Place Order</button>
+                  <button onClick={this.handleSubmit} style={{'float': 'right'}}>Proceed</button>
                 </div>
               </div>
             </div>
@@ -156,6 +213,7 @@ var CreditCard = React.createClass({
 
     getClasses: function(fieldName, extraClasses) {
         if (this.state.defaultsCleared===undefined) {
+            this.
             debugger;
         }
         var classes = {
@@ -192,7 +250,6 @@ var CreditCard = React.createClass({
               </select>
               <select className={this.getClasses("exp_year")} onChange={this.handleChange} id="exp_year" style={{'width': 150}}>
                   <option value="">Expiration Year</option>
-                  <option value="2015">2015</option>
                   <option value="2016">2016</option>
                   <option value="2017">2017</option>
                   <option value="2018">2018</option>
