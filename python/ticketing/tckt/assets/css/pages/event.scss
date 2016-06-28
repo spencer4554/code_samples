@@ -263,6 +263,12 @@ div.tooltip {
 	color: #fff;
 	padding: 20px 30px 10px 20px;   
 }
+#footer-links ul li a {
+	color: #f1b51c;
+}
+#footer-links ul li a:hover {
+	color: #fff;
+}
 select.ticket-quantity.ticket-column-data, select.ticket-shipping-options.ticket-column-data {
 	background-color: #fff;
 	float: right;
