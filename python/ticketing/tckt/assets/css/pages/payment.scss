@@ -1,8 +1,34 @@
-
-input#number.clearDefault, select#exp_month.clearDefault, select#exp_year.clearDefault {
-	margin-right: 10px;
+select#exp_month.clearDefault, select#exp_year.clearDefault {
+	width: 49%;
+}
+select#exp_month.clearDefault {
+	float: left;
+}
+select#exp_year.clearDefault {
+	float: right;
+}
+input#number.clearDefault {
+	float: left;
+	width: 75%;
 }
 input#cvc.clearDefault {
-	position: relative;
-	right: 160px;
+	float: right;
+	width: 23%;
 }
+@media only screen and (min-width: 1026px){
+	input#cvc.clearDefault {
+		right: 0px;
+	}
+}
+
+#payment-form-div {
+	width: 100%;
+}
+#payment-form-div  p {
+	text-align: center;
+}
+form {
+	width: 80%;
+    margin: auto;
+}
+
