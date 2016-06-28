@@ -93,32 +93,32 @@ var Ticketing = React.createClass({
             <div className="ticketing">
               <div className="row">
                 <div className="large-12 column">
-                  <span className="ticket-column-headings" style={{display: 'block'}}>Buy Tickets</span>
+                  <div className="ticket-column-headings">Buy Tickets</div>
                   <p className="ticket-column-data ticket-restrictions" style={{height: 40}}>{ this.props.maxQuantity ? "There is a " + this.props.maxQuantity + " ticket limit per customer.  " : null }Service fees are non-refundable.</p>
                 </div>
               </div>
               <div className="row">
                 <div className="large-12">
                   <div className="ticket-header large-3 columns">
-                    <span className="ticket-column-headings" style={{display: 'block'}}>Ticket Type</span>
+                    <div className="ticket-column-headings" style={{display: 'block'}}>Ticket Type</div>
                     <p className="ticket-type ticket-column-data">Regular</p>
                   </div>
                   <div className="ticket-details large-9 columns">
                     <ul>
                       <li className="large-3 columns">
-                        <span className="ticket-column-headings">Item Price</span>
+                        <div className="ticket-column-headings">Item Price</div>
                         <p className="ticket-price ticket-column-data">{number.asCurrency(this.props.pricePer)}</p>
                       </li>
                       <li className="large-3 columns">
-                        <span className="ticket-column-headings">Service Fee<i className="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></span>
+                        <div className="ticket-column-headings">Service Fee<i className="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></div>
                         <p className="ticket-service-fee ticket-column-data">{number.asCurrency(this.props.serviceFee)}</p>
                       </li>
                       <li className="large-3 columns">
-                        <span className="ticket-column-headings">Facilities Fee<i className="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></span>
+                        <div className="ticket-column-headings">Facilities Fee<i className="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></div>
                         <p className="ticket-facilities-fee ticket-column-data">{number.asCurrency(this.props.facilitiesFee)}</p>
                       </li>
                       <li className="large-3 columns">
-                        <span className="ticket-column-headings">Quantity</span>
+                        <div className="ticket-column-headings">Quantity</div>
                          { this.drawTicketSelect() }
                       </li>
                     </ul>
@@ -127,7 +127,7 @@ var Ticketing = React.createClass({
               </div>
               <div className="row">
                 <div className="large-12 column">
-                  <span className="ticket-column-headings">Shipping</span>
+                  <div className="ticket-column-headings">Shipping</div>
                 </div>
               </div>
               <div className="row">
