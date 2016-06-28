@@ -261,7 +261,16 @@ p.ticket-column-data.ticket-shipping {
 	padding-bottom: 0px;
     margin: 25px 0px 10px 32px;
 }
-
+p.ticket-total.ticket-column-data {
+	margin-left: 30px;
+    float: right;
+}
+span.ticket-total-header.ticket-column-data.ticket-column-headings {
+	float: right;
+	padding-left: 32px;
+	margin-right: 15px;
+	margin-top: 15px;
+}
 
 
 div.tooltip {
@@ -400,17 +409,21 @@ p.ticket-shipping.ticket-column-data {
 	padding: 1.875rem;
 	width: 80%;
 	max-width: 62.5rem;
-	left: 0;
 	right: 0;
 	margin: 0 auto;
 }
-.ticketing-order-button-holder {
-	text-align: center;
+#place-order-button {
+	border-top: 1px solid rgb(228, 227, 227);
+	margin-top: 40px;
+	padding-top: 40px !important;
 }
-@media only screen and (min-width: 1026px) {
-	.ticketing-order-button-holder {
-		width: 100%;
-	}	
+#place-order-button button {
+	float: none !important;
+}
+
+.ticketing-order-button-holder, div#place-order-button.large-12.columns {
+	width: 100%;
+	text-align: center;
 }
 
 .close {
@@ -425,8 +438,8 @@ p.ticket-shipping.ticket-column-data {
 }
 
 .order-summary {
-background-color: #F2F2F2;
-padding: 30px;
+	background-color: #F2F2F2;
+	padding: 30px;
 }
 
 dd { display: block; float: right; }
@@ -435,11 +448,9 @@ dt { display: block; float: left; clear: both; }
 .order-button-holder {
 	text-align: center;
 }
-
 .ticketing-order-button-holder {
 	padding: 20px 0px 10px 5px;
 }
-
 .button.order-button {
 	margin: 0px;
 }
