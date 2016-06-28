@@ -95,7 +95,6 @@ hr {
 	font-family: "runda", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 30px;
 	font-weight: bold;
-	// line-height: 1;
 	color: #FFFFFF;
 	text-shadow: 0 1px 1px rgba(0,0,0,0.28);
 }
@@ -106,35 +105,36 @@ hr {
 	padding-right: 0px;
 }
 #event-details {
-	background-color: #000;
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: #fff;
 	padding: 0px;
 	position: relative;
 }
-#event-details-fade {
-	background-color: rgba(0, 0, 0, 0.5);
+.event-details-fade {
 	height: 100%;
+	padding: 10px;
     width: 100%;   
 }
 #event-details h2 {
 	color: #fff;	
 }
 #event-location {
-	background-color: #f1b51c;
-	color: #090909;
 	left: 0px;
+	padding: 10px;
 	position: relative;
-    width: 30%;
+    width: 55%;
 }
 #event-location a img {
 	position: relative;
     left: 5px;
     bottom: 2px;
 }
-.event-presenter, .event-name, .event-subtitle {
-
+// #event-target {
+// 	display:none; //desktop should show
+// }
+.event-img {
+	width: 100%;
 }
 .event-name {
 	font-weight: bold;
@@ -149,12 +149,17 @@ hr {
 #event-target .large-4 {
 	border-bottom: none;
 }
+#event-details-header {
+	float: none;
+    margin-left: 18px;
+}
 .event-detail {
 	margin-left: 10px;
 }
 .event-details {
-	margin-top:10px;
 	font-size:14px;
+	margin-top: 0px;
+    padding: 0px 15px;
 }
 .event-right-column {
 	width: 100%;
@@ -204,6 +209,9 @@ hr {
 	font-size: 12px;
 	display: block;
 }
+#buy-header, #shippng-header {
+	display: none;
+}
 .ticket-column-headings, p.ticket-column-data.ticket-shipping {
 	border-bottom: none;
 	font-size: 22px;
@@ -219,7 +227,8 @@ p.ticket-column-data {
 	font-size: 22px;
 }
 p.ticket-column-data.ticket-shipping {
-	margin-left: 32px;
+	padding-bottom: 0px;
+    margin: 25px 0px 10px 32px;
 }
 // .ticket-column-headings {
 // 	border-bottom: 1px solid #e9ebef;	
@@ -248,6 +257,11 @@ div.tooltip {
 
 .fade.in {
 	opacity: 1;
+}
+#footer {
+	background-color: #2d2f2e;
+	color: #fff;
+	padding: 20px 30px 10px 20px;   
 }
 select.ticket-quantity.ticket-column-data, select.ticket-shipping-options.ticket-column-data {
 	background-color: #fff;
@@ -369,8 +383,7 @@ dt { display: block; float: left; clear: both; }
 }
 
 .ticketing-order-button-holder {
-	padding-left: 5px;
-	padding-bottom: 10px;
+	padding: 20px 0px 10px 5px;
 }
 
 .button.order-button {
