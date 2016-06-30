@@ -96,7 +96,7 @@ var Event = React.createClass({
             <article>
               <div className="row">
                 { this.drawOrderError() }
-                <div className="large-4 columns">
+                <div className="large-4 columns" id="event-img">
                   <img src={ this.props.image }/>
                 </div>
                 <div className="large-8 columns event-right-column">
