@@ -1,0 +1,47 @@
+div#cc-container {
+	padding-left: 0px;
+	margin-bottom: auto;
+	padding: 0px;
+    width: 100%;
+}
+div#cc-container p {
+	text-align: center;
+}
+input#cvc, select#exp_month {
+	margin-right: 10px;
+}
+input#cvc, select#exp_month, select#exp_year {
+	float: left;
+	width: 140px;
+}
+input#number {
+    width: 383px;
+    float: left;
+    margin-right: 10px;	
+}
+form {
+	width: 85%;
+    margin: auto;
+}
+.event-right-column {
+	width: 100%;
+	// width: 71.66667%;
+}
+.ticketing.cc-container form {
+	width: 90%;
+}
+.ticketing {
+	background-color: #F2F2F2;
+	padding: 40px 10px 10px;
+}
+.ticketing-order-button-holder, div#place-order-button.large-12.columns {
+	width: 100%;
+	text-align: center;
+}
+.ticketing-order-button-holder {
+	padding: 20px 0px 10px 5px;
+}
+.city-state-zip-section .city-state-zip-field {
+	float: left;
+	margin-right: 10px;
+}

@@ -36,7 +36,7 @@ var CreditCard = React.createClass({
             'address_state': null,
             'address_zip': null,
             'address_country': 'USA',
-            'errorMessage': null
+            'errorMessage': null,
             'errors': {},
             'defaultsCleared': [],
             'phone': null,
@@ -194,7 +194,7 @@ var CreditCard = React.createClass({
             <div className="ticketing">
               <div className="row">
                 <div className="large-12">
-                  <div className="large-9 columns">
+                  <div className="large-9 columns" id="cc-container">
                     <p>ENTER YOUR PAYMENT DETAILS</p>
                     { this.state.errorMessage !== null ? <div className="error-message">* { this.state.errorMessage }</div> : "" }
                     { this.drawForm() }
@@ -203,8 +203,8 @@ var CreditCard = React.createClass({
               </div>
               <hr />
               <div className="row">
-                <div className="large-12 columns" style={{ 'paddingRight': 30, 'paddingTop': 10 }}>
-                  <button onClick={this.handleSubmit} style={{'float': 'right'}}>Proceed</button>
+                <div className="large-12 columns cc-button-container">
+                  <button onClick={this.handleSubmit} className="cc-submit-button">Proceed</button>
                 </div>
               </div>
             </div>
@@ -231,9 +231,9 @@ var CreditCard = React.createClass({
         return (
             <form>
               <input className={this.getClasses("name")} onChange={this.handleChange} type="text" id="name" defaultValue="Name" />
-              <input className={this.getClasses("number")} onChange={this.handleChange} type="text" id="number" defaultValue="Card Number" style={{'width': 299, 'float': 'left'}} value={this.state.number} />
-              <input className={this.getClasses("cvc")} onChange={this.handleChange} type="text" id="cvc" defaultValue="CVC/Security Code" style={{'width': 150, 'float': 'right'}} />
-              <select className={this.getClasses("exp_month")} onChange={this.handleChange} id="exp_month" style={{'width': 150, 'marginRight': 6}}>
+              <input className={this.getClasses("number")} onChange={this.handleChange} type="text" id="number" defaultValue="Card Number" value={this.state.number} />
+              <input className={this.getClasses("cvc")} onChange={this.handleChange} type="text" id="cvc" defaultValue="CVC/Security Code" />
+              <select className={this.getClasses("exp_month")} onChange={this.handleChange} id="exp_month">
                   <option value="">Expiration Month</option>
                   <option value="01">01</option>
                   <option value="02">02</option>
@@ -248,7 +248,7 @@ var CreditCard = React.createClass({
                   <option value="11">11</option>
                   <option value="12">12</option>
               </select>
-              <select className={this.getClasses("exp_year")} onChange={this.handleChange} id="exp_year" style={{'width': 150}}>
+              <select className={this.getClasses("exp_year")} onChange={this.handleChange} id="exp_year" style={{'width': 140}}>
                   <option value="">Expiration Year</option>
                   <option value="2016">2016</option>
                   <option value="2017">2017</option>

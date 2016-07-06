@@ -7,6 +7,7 @@ var Ticketing = require('./Ticketing');
 var CreditCard = require('./CreditCard');
 var OrderSummary = require('./OrderSummary');
 
+
 var Event = React.createClass({
 
     getInitialState: function() {
@@ -96,7 +97,7 @@ var Event = React.createClass({
             <article>
               <div className="row">
                 { this.drawOrderError() }
-                <div className="large-4 columns" id="event-img">
+                <div className="large-4 columns event-img">
                   <img src={ this.props.image }/>
                 </div>
                 <div className="large-8 columns event-right-column">
