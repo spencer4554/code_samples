@@ -69,15 +69,23 @@
 	text-align: center;
 	width: 100%;
 }
+#header-target .large-4 {
+	text-align: left;
+}
+#header-target .large-7 {
+	text-align: center;
+}
 #header-target .large-7, #header-target .large-4 {
 	padding-top: 10px;
-	text-align: left;
 }
 #header-target .row {
 	display: inline-flex;
 	height: 150px;
 	padding-top: 10px;
 	width: 100%;
+}
+.large-1.columns {
+	width: 40%;
 }
 .location-address span {
 	font-size: 12px;
@@ -88,17 +96,8 @@
 	font-weight: bold;
 }
 @media only screen and (min-width: 1026px) {
-	#header-target .large-7, #header-target .large-4 {
-		padding-top: 15px;
-	}
 	#header-target .large-4 {
 		padding-left: 0px;
-	}
-	#header-target .large-7 {
-		text-align: center;
-	}
-	.large-1.columns {
-		width: 30%;
 	}
 	#event-target .large-4 {
     	width: 100%;
