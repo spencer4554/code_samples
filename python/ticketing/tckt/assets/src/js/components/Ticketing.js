@@ -47,10 +47,7 @@ var Ticketing = React.createClass({
             <div className="row">
               <div className="large-12">
                 <div className="ticket-header large-4 columns">
-                  <p className="ticket-shipping ticket-column-data">Total:</p>
-                </div>
-                <div className="ticket-header large-2 columns">
-                  <p className="ticket-shipping ticket-column-data">{number.asCurrency(this.state.total)}</p>
+                  <p className="ticket-shipping ticket-column-data" id="total-price">Total: &nbsp; {number.asCurrency(this.state.total)}</p>
                 </div>
               </div>
             </div>);
@@ -147,12 +144,6 @@ var Ticketing = React.createClass({
                   </div>
                 </div>
               </div>
-
-
-
-
-
-
               <hr />
               { this.state.quantity > 0 ? [this.drawTotals(), <hr />] : null }
               <div className="row">
