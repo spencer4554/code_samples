@@ -1,0 +1,49 @@
+{
+  "repository": {},
+  "scripts": {
+    "test": "jest",
+    "test-debug": "node-debug --nodejs --harmony ./node_modules/jest-cli/bin/jest.js --runInBand"
+  },
+  "jest": {
+    "rootDir": "assets/src/js",
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "node_modules/react",
+      "node_modules/underscore",
+      "node_modules/xmldom"
+    ]
+  },
+  "browserify-shim": {
+    "react/addons": "global:React",
+    "react": "global:React",
+    "jquery": "global:$"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "dependencies": {
+    "browserify": "4.2.0",
+    "browserify-shim": "3.6.0",
+    "classNames": "2.2.0",
+    "envify": "1.2.1",
+    "gulp": "3.8.8",
+    "gulp-concat": "2.4.2",
+    "gulp-if-else": "1.0.2",
+    "gulp-minify-css": "0.3.11",
+    "gulp-shell": "0.2.10",
+    "gulp-sass": "2.3.2",
+    "gulp-uglify": "1.0.1",
+    "jest-cli": "0.1.15",
+    "jquery": "2.1.1",
+    "react": "0.12.0",
+    "react-tools": "0.12.0",
+    "reactify": "0.14.0",
+    "underscore": "1.7.0",
+    "vinyl-source-stream": "^1.0.0"
+  },
+  "devDependencies": {
+    "gulp-streamify": "0.0.5"
+  }
+}

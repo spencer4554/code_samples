@@ -1,0 +1,64 @@
+/* ------ events page  ----- */
+.ticketing-order-button-holder, .cc-button-container {
+	padding: 30px 0;
+    text-align: center;
+}
+#place-order-button, .cc-button-container {
+	border-top: 1px solid rgb(228, 227, 227);
+	margin-top: 40px;
+	padding-top: 40px !important;
+}
+#place-order-button button, .cc-button-container button{
+	float: none !important;
+}
+
+.stripe-button-el, .cc-submit-button {
+	overflow: hidden;
+	display: inline-block;
+	visibility: visible !important;
+	background-image: -webkit-linear-gradient(#28a0e5,#015e94);
+	background-image: -moz-linear-gradient(#28a0e5,#015e94);
+	background-image: -ms-linear-gradient(#28a0e5,#015e94);
+	background-image: -o-linear-gradient(#28a0e5,#015e94);
+	background-image: -webkit-linear-gradient(#28a0e5,#015e94);
+	background-image: -moz-linear-gradient(#28a0e5,#015e94);
+	background-image: -ms-linear-gradient(#28a0e5,#015e94);
+	background-image: -o-linear-gradient(#28a0e5,#015e94);
+	background-image: linear-gradient(#28a0e5,#015e94);
+	-webkit-font-smoothing: antialiased;
+	border: 0;
+	padding: 1px;
+	text-decoration: none;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+	-ms-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+	-o-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+	-webkit-touch-callout: none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	align-items: flex-start;
+	text-align: center;
+	background-color: buttonface;
+	box-sizing: border-box;
+	text-rendering: auto;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	width: 30%;
+	height: 35px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+} 

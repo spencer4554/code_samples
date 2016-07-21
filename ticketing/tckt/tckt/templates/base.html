@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'css/foundation.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.scss' %}" />
+    <link rel="stylesheet" href="{% static 'compiled/base.css' %}" />
+
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react-with-addons.js"></script>
+    <script src="{% static "js/foundation.min.js" %}"></script>
+    <script src="{% static "compiled/tckt.js" %}" ></script>
+    <title>{{ title }}</title>
+  </head>
+  <div>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="panel">
+        <h1>Feed Template</h1>
+      </div>
+    </div>
+  </div>
+  {% block body %}
+  {% endblock %}
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr/>
+      <div class="row">
+        <div id="footer" class="large-7 columns">
+          <div id="footer-links">
+            <ul class="inline-list right">
+              <li><a href="#">Section 1</a></li>
+              <li><a href="#">Section 2</a></li>
+              <li><a href="#">Section 3</a></li>
+              <li><a href="#">Section 4</a></li>
+              <li><a href="#">Section 5</a></li>
+              <li><a href="#">Section 6</a></li>
+            </ul>
+          </div>
+          <div>
+            <p>Copyright © Paul Prior 2015</p>         
+          </div>
+        </div>     
+      </div>
+    </div>
+  </footer>
+</html>
