@@ -351,7 +351,7 @@ var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined
 var Ticketing = require('./Ticketing');
 var CreditCard = require('./CreditCard');
 var OrderSummary = require('./OrderSummary');
-var Location = require('./Location');
+// var Location = require('./Location');
 
 
 var Event = React.createClass({displayName: 'Event',
@@ -392,8 +392,7 @@ var Event = React.createClass({displayName: 'Event',
         var props = _.clone(this.props);
         props.quantity = this.state.quantity; 
         props.total = this.state.total;
-        props.close = this.closeOrderSummaryOverlay; 
-
+        props.close = this.closeOrderSummaryOverlay;
         return React.createElement(CreditCard, React.__spread({},  props ));
     },
 
@@ -491,7 +490,7 @@ var Event = React.createClass({displayName: 'Event',
 module.exports = Event;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./CreditCard":1,"./Location":4,"./OrderSummary":5,"./Ticketing":7,"underscore":"9eM++n"}],3:[function(require,module,exports){
+},{"./CreditCard":1,"./OrderSummary":5,"./Ticketing":7,"underscore":"9eM++n"}],3:[function(require,module,exports){
 (function (global){
 /** @jsx React.DOM */
 

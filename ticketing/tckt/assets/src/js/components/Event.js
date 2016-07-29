@@ -6,7 +6,7 @@ var $ = require('jquery');
 var Ticketing = require('./Ticketing');
 var CreditCard = require('./CreditCard');
 var OrderSummary = require('./OrderSummary');
-var Location = require('./Location');
+// var Location = require('./Location');
 
 
 var Event = React.createClass({
@@ -47,8 +47,7 @@ var Event = React.createClass({
         var props = _.clone(this.props);
         props.quantity = this.state.quantity; 
         props.total = this.state.total;
-        props.close = this.closeOrderSummaryOverlay; 
-
+        props.close = this.closeOrderSummaryOverlay;
         return <CreditCard {...props } />;
     },
 
