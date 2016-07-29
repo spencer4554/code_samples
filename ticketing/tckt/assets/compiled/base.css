@@ -60,8 +60,7 @@ div#cc-container {
   padding-left: 0px;
   margin-bottom: auto;
   padding: 0px;
-  width: 100%;
-  background-color: red; }
+  width: 100%; }
   div#cc-container div#summary.row {
     text-align: center;
     border: 1px solid rgba(7, 7, 7, 0.63);
