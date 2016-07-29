@@ -7,8 +7,8 @@ var _ = require('underscore');
 var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined" ? global.$ : null);
 var number = require('../utils/number');
 var classNames = require('classnames');
-var OrderSummary = require('./OrderSummary'); //
-var Ticketing = require('./Ticketing');//
+// var OrderSummary = require('./OrderSummary'); //
+// var Ticketing = require('./Ticketing');//
 
 
 
@@ -199,10 +199,9 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
     render: function() {
         return (
             React.createElement("div", {className: "ticketing"}, 
-              React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "large-12"}, 
-                  React.createElement("div", {className: "large-9 columns", id: "cc-container"}, 
-                  React.createElement("div", {className: "row", id: "summary"}, "Order Summary"), 
+              React.createElement("div", {className: "row", id: "cc-container"}, 
+                  React.createElement("div", {className: "large-12 columns", id: "cc-form"}, 
+                    React.createElement("div", {className: "row", id: "summary"}, "Order Summary"), 
                     React.createElement("div", {className: "row", id: "summary-details"}, 
                       React.createElement("div", {className: "small-4"}, "Ticket Type: REGULAR"), 
                       React.createElement("div", {className: "small-4"}, "Quantity: ", this.props.quantity), 
@@ -211,13 +210,12 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
                     React.createElement("p", null, " ENTER YOUR PAYMENT DETAILS"), 
                      this.state.errorMessage !== null ? React.createElement("div", {className: "error-message"}, "* ",  this.state.errorMessage) : "", 
                      this.drawForm() 
+                  ), 
+                React.createElement("hr", null), 
+                React.createElement("div", {className: "row"}, 
+                  React.createElement("div", {className: "large-12 columns cc-button-container"}, 
+                    React.createElement("button", {onClick: this.handleSubmit, className: "cc-submit-button"}, "Proceed")
                   )
-                )
-              ), 
-              React.createElement("hr", null), 
-              React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "large-12 columns cc-button-container"}, 
-                  React.createElement("button", {onClick: this.handleSubmit, className: "cc-submit-button"}, "Proceed")
                 )
               )
             )
@@ -343,7 +341,7 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
 module.exports = CreditCard;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../utils/number":10,"./OrderSummary":5,"./Ticketing":7,"classnames":11,"underscore":"9eM++n"}],2:[function(require,module,exports){
+},{"../utils/number":10,"classnames":11,"underscore":"9eM++n"}],2:[function(require,module,exports){
 (function (global){
 /** @jsx React.DOM */
 

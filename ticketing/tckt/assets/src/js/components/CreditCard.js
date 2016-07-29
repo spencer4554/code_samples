@@ -5,8 +5,8 @@ var _ = require('underscore');
 var $ = require('jquery');
 var number = require('../utils/number');
 var classNames = require('classnames');
-var OrderSummary = require('./OrderSummary'); //
-var Ticketing = require('./Ticketing');//
+// var OrderSummary = require('./OrderSummary'); //
+// var Ticketing = require('./Ticketing');//
 
 
 
@@ -197,10 +197,9 @@ var CreditCard = React.createClass({
     render: function() {
         return (
             <div className="ticketing">          
-              <div className="row">
-                <div className="large-12">
-                  <div className="large-9 columns" id="cc-container">
-                  <div className="row" id="summary">Order Summary</div>
+              <div className="row" id="cc-container">
+                  <div className="large-12 columns" id="cc-form">
+                    <div className="row" id="summary">Order Summary</div>
                     <div className="row" id="summary-details">
                       <div className="small-4">Ticket Type: REGULAR</div>
                       <div className="small-4">Quantity: {this.props.quantity}</div>
@@ -210,12 +209,11 @@ var CreditCard = React.createClass({
                     { this.state.errorMessage !== null ? <div className="error-message">* { this.state.errorMessage }</div> : "" }
                     { this.drawForm() }
                   </div>
-                </div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="large-12 columns cc-button-container">
-                  <button onClick={this.handleSubmit} className="cc-submit-button">Proceed</button>
+                <hr />
+                <div className="row">
+                  <div className="large-12 columns cc-button-container">
+                    <button onClick={this.handleSubmit} className="cc-submit-button">Proceed</button>
+                  </div>
                 </div>
               </div>
             </div>
