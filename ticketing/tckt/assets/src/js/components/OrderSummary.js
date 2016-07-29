@@ -6,6 +6,7 @@ var $ = require('jquery');
 var number = require('../utils/number');
 
 var OrderSummary = React.createClass({
+  
     drawLocation: function() {
         return this.props.event.location.name + ", " + this.props.event.location.line1 + ", " + this.props.event.location.city;
     },

@@ -6,6 +6,7 @@ var $ = require('jquery');
 var Ticketing = require('./Ticketing');
 var CreditCard = require('./CreditCard');
 var OrderSummary = require('./OrderSummary');
+var Location = require('./Location');
 
 
 var Event = React.createClass({
@@ -44,13 +45,14 @@ var Event = React.createClass({
 
     drawCreditCard: function() {
         var props = _.clone(this.props);
-        props.quantity = this.state.quantity;
+        props.quantity = this.state.quantity; 
         props.total = this.state.total;
-        props.close = this.closeOrderSummaryOverlay;
-        return <CreditCard {...props} />;
+        props.close = this.closeOrderSummaryOverlay; 
+
+        return <CreditCard {...props } />;
     },
 
-    showCreditCard: function(quantity, total) {
+    showCreditCard: function(quantity, total) { 
         this.setState({
             'showCreditCard': true,
             'quantity': quantity,
@@ -63,7 +65,8 @@ var Event = React.createClass({
         props.showPurchase = !_.isEmpty(this.props.transaction);
         props.purchase = this.purchase;
         props.showCreditCard = this.showCreditCard;
-        return <Ticketing {...props} />;
+        return <Ticketing {...props}  />;
+        // showCreditCard = {this.showCreditCard}
     },
 
     drawOrderSummaryOverlay: function() {
@@ -90,6 +93,12 @@ var Event = React.createClass({
             </div>
           </div>);
     },
+    // updateData: function(quantity, total){
+    //      this.setState({
+    //         'quantity': quantity,
+    //         'total': total
+    //     });       
+    // },
 
     render: function() {
         return (
@@ -97,20 +106,34 @@ var Event = React.createClass({
             <article>
               <div className="row">
                 { this.drawOrderError() }
-                <div className="large-4 columns event-img">
-                  <img src={ this.props.image }/>
-                </div>
+
+                <div className="event-detail">
+                  <div className="row">
+                    <div className="large-12 column">
+                      <span className="small-4 ticket-column-headings">Event Details</span>
+                      <p className="event-details">{this.props.description}</p>
+                    </div>
+                  </div>
+                </div>  
+                <div className="large-4 columns event-left-column">
+                  <div className="small-4  event-image-container"><img className="event-col-img" src={ this.props.image }/></div>     
+                    
+                  <div className="small-4 event-details2"> 
+                    <span className="small-4 ticket-column-headings">Event Details</span>
+                    <p className="event-details">{this.props.description}</p>               
+                  </div>      
+
+                  <div className="small-4 location-container">
+                    <Location {...this.props.location} />
+                    <div className="event-start">
+                      {this.props.startText}
+                    </div>
+                  </div>
+
+                </div>                              
                 <div className="large-8 columns event-right-column">
                   { this.state.showCreditCard ? this.drawCreditCard() : this.drawTicketing() }
                   <br />
-                  <div className="event-detail">
-                    <div className="row">
-                      <div className="large-12 column">
-                        <span className="ticket-column-headings">Event Details</span>
-                        <p className="event-details">{this.props.description}</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </article>

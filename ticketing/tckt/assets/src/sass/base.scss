@@ -1,7 +1,75 @@
-$font-stack:    Helvetica, sans-serif;
-$primary-color: blue;
+/* fonts */
+$primary-stack:  Helvetica, sans-serif;
+$accent-font: 'Syncopate', sans-serif;
+$general-font:'Ubuntu', sans-serif;
 
-body {
-    font: 100% $font-stack;
-    background-color: $primary-color !important;
-    }
+/* color pallet */
+$gold: #daa520;
+
+
+
+
+
+
+/* global styles */
+dd { display: block; float: right; }
+dt { display: block; float: left; clear: both; }
+
+p {
+	font-family: $general-font;
+	font-weight: 300;
+}
+h1, h2, h3, h4, h5 {
+	font-family: $accent-font;
+}
+.error-message {
+	padding-bottom: 10px;
+	color: red;
+}
+.panel {
+	background: #2d2f2e;
+}
+.panel h1 {
+	color: #fff;
+	font-weight: 300;
+}
+.panel-row, footer {
+	min-width: 100%;
+
+	.large-12 {
+		padding: 0px;
+	}
+}
+.panel-row {
+	display: none;
+	.panel {
+		border: none;
+		margin-bottom: 0px;
+	}
+}
+
+footer {
+	padding: 0px 10px;
+		#footer {
+			background-color: #000;
+			color: #fff;
+			margin-top: 30px;
+			padding: 20px 30px 10px 20px;  
+			width: 100%; 
+		 }
+		#footer-links ul li a {
+			color: #f1b51c;
+		}
+		#footer-links ul li a:hover {
+			color: #fff;
+		}
+		#footer-links {
+			display: none;
+		}
+		#copyright {
+			text-align: center;
+		}
+}
+
+
+@import '../../css/main.scss';

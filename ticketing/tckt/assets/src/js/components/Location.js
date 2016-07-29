@@ -9,7 +9,7 @@ var Location = require('./Location');
 var Location = React.createClass({
     render: function() {
         return (
-            <div>
+            <div id="location">
               <span className="location-name">{this.props.name}</span>
               <a className="event-location" href={"http://maps.google.com/maps?daddr=" + this.props.addr_code}rel="nofollow" target="_blank">
                 <img src="https://cdn.ticketfly.com/wp-content/themes/ticketfly-v3/img/icon-location-small.gif" />

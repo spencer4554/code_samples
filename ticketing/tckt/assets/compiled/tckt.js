@@ -7,8 +7,13 @@ var _ = require('underscore');
 var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined" ? global.$ : null);
 var number = require('../utils/number');
 var classNames = require('classnames');
+var OrderSummary = require('./OrderSummary'); //
+var Ticketing = require('./Ticketing');//
+
+
 
 var CreditCard = React.createClass({displayName: 'CreditCard',
+
     componentDidMount: function() {
         $(".clearDefault").focus(this.clearInitial);
     },
@@ -197,7 +202,13 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "large-12"}, 
                   React.createElement("div", {className: "large-9 columns", id: "cc-container"}, 
-                    React.createElement("p", null, "ENTER YOUR PAYMENT DETAILS"), 
+                  React.createElement("div", {className: "row", id: "summary"}, "Order Summary"), 
+                    React.createElement("div", {className: "row", id: "summary-details"}, 
+                      React.createElement("div", {className: "small-4"}, "Ticket Type: REGULAR"), 
+                      React.createElement("div", {className: "small-4"}, "Quantity: ", this.props.quantity), 
+                      React.createElement("div", {className: "small-4"}, "Total: ", this.props.total)
+                    ), 
+                    React.createElement("p", null, " ENTER YOUR PAYMENT DETAILS"), 
                      this.state.errorMessage !== null ? React.createElement("div", {className: "error-message"}, "* ",  this.state.errorMessage) : "", 
                      this.drawForm() 
                   )
@@ -332,7 +343,7 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
 module.exports = CreditCard;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../utils/number":10,"classnames":11,"underscore":"9eM++n"}],2:[function(require,module,exports){
+},{"../utils/number":10,"./OrderSummary":5,"./Ticketing":7,"classnames":11,"underscore":"9eM++n"}],2:[function(require,module,exports){
 (function (global){
 /** @jsx React.DOM */
 
@@ -342,6 +353,7 @@ var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined
 var Ticketing = require('./Ticketing');
 var CreditCard = require('./CreditCard');
 var OrderSummary = require('./OrderSummary');
+var Location = require('./Location');
 
 
 var Event = React.createClass({displayName: 'Event',
@@ -380,13 +392,14 @@ var Event = React.createClass({displayName: 'Event',
 
     drawCreditCard: function() {
         var props = _.clone(this.props);
-        props.quantity = this.state.quantity;
+        props.quantity = this.state.quantity; 
         props.total = this.state.total;
-        props.close = this.closeOrderSummaryOverlay;
-        return React.createElement(CreditCard, React.__spread({},  props));
+        props.close = this.closeOrderSummaryOverlay; 
+
+        return React.createElement(CreditCard, React.__spread({},  props ));
     },
 
-    showCreditCard: function(quantity, total) {
+    showCreditCard: function(quantity, total) { 
         this.setState({
             'showCreditCard': true,
             'quantity': quantity,
@@ -400,6 +413,7 @@ var Event = React.createClass({displayName: 'Event',
         props.purchase = this.purchase;
         props.showCreditCard = this.showCreditCard;
         return React.createElement(Ticketing, React.__spread({},  props));
+        // showCreditCard = {this.showCreditCard}
     },
 
     drawOrderSummaryOverlay: function() {
@@ -426,6 +440,12 @@ var Event = React.createClass({displayName: 'Event',
             )
           ));
     },
+    // updateData: function(quantity, total){
+    //      this.setState({
+    //         'quantity': quantity,
+    //         'total': total
+    //     });       
+    // },
 
     render: function() {
         return (
@@ -433,20 +453,34 @@ var Event = React.createClass({displayName: 'Event',
             React.createElement("article", null, 
               React.createElement("div", {className: "row"}, 
                  this.drawOrderError(), 
-                React.createElement("div", {className: "large-4 columns event-img"}, 
-                  React.createElement("img", {src:  this.props.image})
+
+                React.createElement("div", {className: "event-detail"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "large-12 column"}, 
+                      React.createElement("span", {className: "small-4 ticket-column-headings"}, "Event Details"), 
+                      React.createElement("p", {className: "event-details"}, this.props.description)
+                    )
+                  )
+                ), 
+                React.createElement("div", {className: "large-4 columns event-left-column"}, 
+                  React.createElement("div", {className: "small-4  event-image-container"}, React.createElement("img", {className: "event-col-img", src:  this.props.image})), 
+                    
+                  React.createElement("div", {className: "small-4 event-details2"}, 
+                    React.createElement("span", {className: "small-4 ticket-column-headings"}, "Event Details"), 
+                    React.createElement("p", {className: "event-details"}, this.props.description)
+                  ), 
+
+                  React.createElement("div", {className: "small-4 location-container"}, 
+                    React.createElement(Location, React.__spread({},  this.props.location)), 
+                    React.createElement("div", {className: "event-start"}, 
+                      this.props.startText
+                    )
+                  )
+
                 ), 
                 React.createElement("div", {className: "large-8 columns event-right-column"}, 
                    this.state.showCreditCard ? this.drawCreditCard() : this.drawTicketing(), 
-                  React.createElement("br", null), 
-                  React.createElement("div", {className: "event-detail"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("div", {className: "large-12 column"}, 
-                        React.createElement("span", {className: "ticket-column-headings"}, "Event Details"), 
-                        React.createElement("p", {className: "event-details"}, this.props.description)
-                      )
-                    )
-                  )
+                  React.createElement("br", null)
                 )
               )
             ), 
@@ -459,7 +493,7 @@ var Event = React.createClass({displayName: 'Event',
 module.exports = Event;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./CreditCard":1,"./OrderSummary":5,"./Ticketing":7,"underscore":"9eM++n"}],3:[function(require,module,exports){
+},{"./CreditCard":1,"./Location":4,"./OrderSummary":5,"./Ticketing":7,"underscore":"9eM++n"}],3:[function(require,module,exports){
 (function (global){
 /** @jsx React.DOM */
 
@@ -472,23 +506,17 @@ var EventHeader = React.createClass({displayName: 'EventHeader',
     render: function() {
         return (
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "large-1 columns"}, 
+            React.createElement("div", {className: "small-2 columns"}, 
               React.createElement("div", {className: "event-date"}, 
                 React.createElement("p", {className: "event-date-day-of-week"},  this.props.dow), 
-                React.createElement("p", {className: "event-date-month"},  this.props.month), 
-                React.createElement("p", {className: "event-date-day"},  this.props.day)
+                React.createElement("span", {className: "event-date-month"},  this.props.month, " "), 
+                React.createElement("span", {className: "event-date-day"},  this.props.day)
               )
             ), 
-            React.createElement("div", {className: "large-7 columns", id: "event-details"}, 
+            React.createElement("div", {className: "small-10 columns", id: "event-details"}, 
               React.createElement("span", {className: "event-presenter"},  this.props.presenter), 
               React.createElement("h2", {className: "event-name"},  this.props.name), 
               React.createElement("span", {className: "event-subtitle"},  this.props.subtitle)
-            ), 
-            React.createElement("div", {className: "large-4 columns", id: "event-location"}, 
-              React.createElement(Location, React.__spread({},  this.props.location)), 
-              React.createElement("div", {className: "event-start"}, 
-                this.props.startText
-              )
             )
           )
         );
@@ -511,7 +539,7 @@ var Location = require('./Location');
 var Location = React.createClass({displayName: 'Location',
     render: function() {
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {id: "location"}, 
               React.createElement("span", {className: "location-name"}, this.props.name), 
               React.createElement("a", {className: "event-location", href: "http://maps.google.com/maps?daddr=" + this.props.addr_code, rel: "nofollow", target: "_blank"}, 
                 React.createElement("img", {src: "https://cdn.ticketfly.com/wp-content/themes/ticketfly-v3/img/icon-location-small.gif"})
@@ -541,6 +569,7 @@ var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined
 var number = require('../utils/number');
 
 var OrderSummary = React.createClass({displayName: 'OrderSummary',
+  
     drawLocation: function() {
         return this.props.event.location.name + ", " + this.props.event.location.line1 + ", " + this.props.event.location.city;
     },
@@ -624,7 +653,9 @@ var _ = require("underscore");
 var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined" ? global.$ : null);
 var number = require('../utils/number');
 
+
 var Ticketing = React.createClass({displayName: 'Ticketing',
+
     getInitialState: function() {
         if (!_.isEmpty(this.props.transaction)) {
             return {'quantity': this.props.transaction.quantity,
@@ -641,8 +672,10 @@ var Ticketing = React.createClass({displayName: 'Ticketing',
 
     changeQuantity: function(event) {
         var quantity = parseFloat(event.target.value);
+        var total = this.calculateTotal(quantity);
         this.setState({'quantity': quantity,
-                       'total': this.calculateTotal(quantity)});
+                       'total': total });
+        // this.props.showCreditCard(quantity, total);
     },
 
     drawTicketSelect: function() {
@@ -651,7 +684,7 @@ var Ticketing = React.createClass({displayName: 'Ticketing',
         } else {
             return (
                 React.createElement("div", null, 
-                  React.createElement("select", {onChange: this.changeQuantity, name: "ticket-quantity", className: "ticket-quantity ticket-column-data", style: {marginTop: 10}}, 
+                  React.createElement("select", {onChange: this.changeQuantity, name: "ticket-quantity", className: "ticket-quantity ticket-column-data"}, 
                     React.createElement("option", null, "Select #"), 
                      _.map(_.range(10), function(i) { return React.createElement("option", {key: "option_" + i, value: i+1}, i+1) }), ";"
                   ), 
@@ -665,8 +698,8 @@ var Ticketing = React.createClass({displayName: 'Ticketing',
         return (
             React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "large-12"}, 
-                React.createElement("div", {className: "ticket-header large-4 columns"}, 
-                  React.createElement("p", {className: "ticket-shipping ticket-column-data", id: "total-price"}, "Total:   ", number.asCurrency(this.state.total))
+                React.createElement("div", {className: "ticket-header large-4 columns", id: "total-price"}, 
+                  React.createElement("p", {className: "ticket-shipping ticket-column-data"}, "Total:   ", number.asCurrency(this.state.total))
                 )
               )
             ));
@@ -687,7 +720,7 @@ var Ticketing = React.createClass({displayName: 'Ticketing',
             return;
         }
 
-        this.props.showCreditCard();
+        this.props.showCreditCard(this.state.quantity, this.state.total);
     },
 
     drawPurchaseButton: function() {
@@ -710,12 +743,12 @@ var Ticketing = React.createClass({displayName: 'Ticketing',
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "large-12 column"}, 
                   React.createElement("div", {className: "ticket-column-headings hide"}, "Buy Tickets"), 
-                  React.createElement("p", {className: "ticket-column-data ticket-restrictions", style: {height: 40}},  this.props.maxQuantity ? "There is a " + this.props.maxQuantity + " ticket limit per customer.  " : null, "Service fees are non-refundable.")
+                  React.createElement("p", {className: "ticket-column-data ticket-restrictions"},  this.props.maxQuantity ? "There is a " + this.props.maxQuantity + " ticket limit per customer.  " : null, "Service fees are non-refundable.")
                 )
               ), 
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "large-12"}, 
-                  React.createElement("div", {className: "ticket-details large-9 columns"}, 
+                  React.createElement("div", {className: "ticket-details columns"}, 
                     React.createElement("ul", null, 
                       React.createElement("li", {className: "large-3 columns"}, 
                         React.createElement("div", {className: "ticket-column-headings ticket-type"}, "Ticket Type"), 
@@ -732,37 +765,31 @@ var Ticketing = React.createClass({displayName: 'Ticketing',
                       React.createElement("li", {className: "large-3 columns"}, 
                         React.createElement("div", {className: "ticket-column-headings"}, "Facilities Fee", React.createElement("i", {className: "fa fa-info", 'data-toggle': "tooltip", 'data-placement': "top", title: "", 'data-tooltip-on': "", 'data-original-title': "$0.05 per additional GB"})), 
                         React.createElement("p", {className: "ticket-facilities-fee ticket-column-data"}, number.asCurrency(this.props.facilitiesFee))
-                      ), 
-                      React.createElement("li", null, 
-                        React.createElement("div", {className: "row ticketing-selects"}, 
-                          React.createElement("div", {className: "large-12"}, 
-                            React.createElement("div", {className: "ticket-header large-4 columns"}, 
-                              React.createElement("p", {className: "quantity ticket-shipping ticket-column-data"}, "Quantity")
-                            ), 
-                            React.createElement("div", {className: "ticket-header large-3 columns"}, 
-                                this.drawTicketSelect() 
-                            )
-                          )
-                        )
-                      ), 
-                      React.createElement("li", null, 
-                        React.createElement("div", {className: "row ticketing-selects"}, 
-                          React.createElement("div", {className: "large-12"}, 
-                            React.createElement("div", {className: "ticket-header large-4 columns"}, 
-                              React.createElement("p", {className: "ticket-shipping ticket-column-data"}, "Select your shipping method")
-                            ), 
-                            React.createElement("div", {className: "ticket-header large-3 columns"}, 
-                              React.createElement("select", {name: "ticket-shipping-options", className: "ticket-shipping-options ticket-column-data"}, 
-                                React.createElement("option", {value: "wc"}, "Will Call")
-                              )
-                            )
-                          )
-                        )
                       )
                     )
                   )
                 )
               ), 
+                React.createElement("div", {className: "row ticketing-selects-row"}, 
+                  React.createElement("div", {className: "large-12"}, 
+                    React.createElement("div", {className: "large-4 columns"}, 
+                      React.createElement("p", {className: "quantity ticket-shipping ticket-column-data"}, "Quantity")
+                    ), 
+                    React.createElement("div", {className: "ticket-header large-8 columns"}, 
+                        this.drawTicketSelect() 
+                    )
+                  ), 
+                  React.createElement("div", {className: "large-12"}, 
+                    React.createElement("div", {className: "ticket-header large-4 columns"}, 
+                      React.createElement("p", {className: "shipping-method ticket-shipping ticket-column-data"}, "Shipping method")
+                    ), 
+                    React.createElement("div", {className: "ticket-header  large-8 columns"}, 
+                      React.createElement("select", {name: "ticket-shipping-options", className: "ticket-shipping-options ticket-column-data"}, 
+                        React.createElement("option", {value: "wc"}, "Will Call")
+                      )
+                    )
+                  )
+                ), 
               React.createElement("hr", null), 
                this.state.quantity > 0 ? [this.drawTotals(), React.createElement("hr", null)] : null, 
               React.createElement("div", {className: "row"}, 

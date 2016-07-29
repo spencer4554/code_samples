@@ -5,7 +5,9 @@ var _ = require("underscore");
 var $ = require('jquery');
 var number = require('../utils/number');
 
+
 var Ticketing = React.createClass({
+
     getInitialState: function() {
         if (!_.isEmpty(this.props.transaction)) {
             return {'quantity': this.props.transaction.quantity,
@@ -22,8 +24,10 @@ var Ticketing = React.createClass({
 
     changeQuantity: function(event) {
         var quantity = parseFloat(event.target.value);
+        var total = this.calculateTotal(quantity);
         this.setState({'quantity': quantity,
-                       'total': this.calculateTotal(quantity)});
+                       'total': total });
+        // this.props.showCreditCard(quantity, total);
     },
 
     drawTicketSelect: function() {
@@ -32,7 +36,7 @@ var Ticketing = React.createClass({
         } else {
             return (
                 <div>
-                  <select onChange={this.changeQuantity} name="ticket-quantity" className="ticket-quantity ticket-column-data" style={{marginTop: 10}}>
+                  <select onChange={this.changeQuantity} name="ticket-quantity" className="ticket-quantity ticket-column-data">
                     <option>Select #</option>
                     { _.map(_.range(10), function(i) { return <option key={"option_" + i} value={i+1}>{i+1}</option> })};
                   </select>
@@ -46,8 +50,8 @@ var Ticketing = React.createClass({
         return (
             <div className="row">
               <div className="large-12">
-                <div className="ticket-header large-4 columns">
-                  <p className="ticket-shipping ticket-column-data" id="total-price">Total: &nbsp; {number.asCurrency(this.state.total)}</p>
+                <div className="ticket-header large-4 columns" id="total-price">
+                  <p className="ticket-shipping ticket-column-data">Total: &nbsp; {number.asCurrency(this.state.total)}</p>
                 </div>
               </div>
             </div>);
@@ -68,7 +72,7 @@ var Ticketing = React.createClass({
             return;
         }
 
-        this.props.showCreditCard();
+        this.props.showCreditCard(this.state.quantity, this.state.total);
     },
 
     drawPurchaseButton: function() {
@@ -91,12 +95,12 @@ var Ticketing = React.createClass({
               <div className="row">
                 <div className="large-12 column">
                   <div className="ticket-column-headings hide">Buy Tickets</div>
-                  <p className="ticket-column-data ticket-restrictions" style={{height: 40}}>{ this.props.maxQuantity ? "There is a " + this.props.maxQuantity + " ticket limit per customer.  " : null }Service fees are non-refundable.</p>
+                  <p className="ticket-column-data ticket-restrictions">{ this.props.maxQuantity ? "There is a " + this.props.maxQuantity + " ticket limit per customer.  " : null }Service fees are non-refundable.</p>
                 </div>
               </div>
               <div className="row">
                 <div className="large-12">
-                  <div className="ticket-details large-9 columns">
+                  <div className="ticket-details columns">
                     <ul>
                       <li className="large-3 columns">
                         <div className="ticket-column-headings ticket-type" >Ticket Type</div>
@@ -114,36 +118,30 @@ var Ticketing = React.createClass({
                         <div className="ticket-column-headings">Facilities Fee<i className="fa fa-info" data-toggle="tooltip" data-placement="top" title="" data-tooltip-on="" data-original-title="$0.05 per additional GB"></i></div>
                         <p className="ticket-facilities-fee ticket-column-data">{number.asCurrency(this.props.facilitiesFee)}</p>
                       </li>
-                      <li>
-                        <div className="row ticketing-selects">
-                          <div className="large-12">
-                            <div className="ticket-header large-4 columns">
-                              <p className="quantity ticket-shipping ticket-column-data">Quantity</p>
-                            </div>
-                            <div className="ticket-header large-3 columns">
-                               { this.drawTicketSelect() }
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="row ticketing-selects">
-                          <div className="large-12">
-                            <div className="ticket-header large-4 columns">
-                              <p className="ticket-shipping ticket-column-data">Select your shipping method</p>
-                            </div>
-                            <div className="ticket-header large-3 columns">
-                              <select name="ticket-shipping-options" className="ticket-shipping-options ticket-column-data">
-                                <option value="wc">Will Call</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
+                <div className="row ticketing-selects-row">
+                  <div className="large-12">
+                    <div className="large-4 columns">
+                      <p className="quantity ticket-shipping ticket-column-data">Quantity</p>
+                    </div>
+                    <div className="ticket-header large-8 columns">
+                       { this.drawTicketSelect() }
+                    </div>
+                  </div>                 
+                  <div className="large-12">
+                    <div className="ticket-header large-4 columns">
+                      <p className="shipping-method ticket-shipping ticket-column-data">Shipping method</p>
+                    </div>
+                    <div className="ticket-header  large-8 columns">
+                      <select name="ticket-shipping-options" className="ticket-shipping-options ticket-column-data">
+                        <option value="wc">Will Call</option>
+                      </select>
+                    </div>
+                  </div> 
+                </div>              
               <hr />
               { this.state.quantity > 0 ? [this.drawTotals(), <hr />] : null }
               <div className="row">

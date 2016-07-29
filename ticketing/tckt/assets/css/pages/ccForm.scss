@@ -3,10 +3,27 @@ div#cc-container {
 	margin-bottom: auto;
 	padding: 0px;
     width: 100%;
+    
+    div#summary.row {
+		text-align: center;
+	    border: 1px solid rgba(7, 7, 7, 0.63);
+	    height: 60px;
+	    font-size: 14px;
+	    padding: 20px;
+	    margin-bottom: 40px;
+	    font-family: "Syncopate", sans-serif;
+	    font-weight: 600;
+	    color: #f08a24;
+	    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.47);
+	    .small-4 {
+	    	float: left;
+	    }
+	}
+	p {
+		text-align: center;
+	}	
 }
-div#cc-container p {
-	text-align: center;
-}
+
 input#cvc, select#exp_month {
 	margin-right: 10px;
 }
@@ -23,16 +40,8 @@ form {
 	width: 85%;
     margin: auto;
 }
-.event-right-column {
-	width: 100%;
-	// width: 71.66667%;
-}
 .ticketing.cc-container form {
 	width: 90%;
-}
-.ticketing {
-	background-color: #F2F2F2;
-	padding: 40px 10px 10px;
 }
 .ticketing-order-button-holder, div#place-order-button.large-12.columns {
 	width: 100%;
@@ -40,6 +49,9 @@ form {
 }
 .ticketing-order-button-holder {
 	padding: 20px 0px 10px 5px;
+}
+.order-button-holder {
+	text-align: center;
 }
 .city-state-zip-section .city-state-zip-field {
 	float: left;

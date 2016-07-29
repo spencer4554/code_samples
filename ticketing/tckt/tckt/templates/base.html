@@ -1,9 +1,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="{% static 'css/foundation.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/main.scss' %}" />
     <link rel="stylesheet" href="{% static 'compiled/base.css' %}" />
-
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300|Syncopate' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react-with-addons.js"></script>
     <script src="{% static "js/foundation.min.js" %}"></script>
@@ -11,7 +10,7 @@
     <title>{{ title }}</title>
   </head>
   <div>
-  <div class="row">
+  <div class="row panel-row">
     <div class="large-12 columns">
       <div class="panel">
         <h1>Feed Template</h1>
@@ -35,7 +34,7 @@
               <li><a href="#">Section 6</a></li>
             </ul>
           </div>
-          <div>
+          <div id="copyright">
             <p>Copyright © Paul Prior 2015</p>         
           </div>
         </div>     

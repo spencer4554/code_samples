@@ -5,8 +5,13 @@ var _ = require('underscore');
 var $ = require('jquery');
 var number = require('../utils/number');
 var classNames = require('classnames');
+var OrderSummary = require('./OrderSummary'); //
+var Ticketing = require('./Ticketing');//
+
+
 
 var CreditCard = React.createClass({
+
     componentDidMount: function() {
         $(".clearDefault").focus(this.clearInitial);
     },
@@ -191,11 +196,17 @@ var CreditCard = React.createClass({
 
     render: function() {
         return (
-            <div className="ticketing">
+            <div className="ticketing">          
               <div className="row">
                 <div className="large-12">
                   <div className="large-9 columns" id="cc-container">
-                    <p>ENTER YOUR PAYMENT DETAILS</p>
+                  <div className="row" id="summary">Order Summary</div>
+                    <div className="row" id="summary-details">
+                      <div className="small-4">Ticket Type: REGULAR</div>
+                      <div className="small-4">Quantity: {this.props.quantity}</div>
+                      <div className="small-4">Total: {this.props.total}</div>
+                    </div>
+                    <p> ENTER YOUR PAYMENT DETAILS</p>
                     { this.state.errorMessage !== null ? <div className="error-message">* { this.state.errorMessage }</div> : "" }
                     { this.drawForm() }
                   </div>

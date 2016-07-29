@@ -1,111 +1,54 @@
+.event-header-row {
+	background-image: url('/media/event-image/None/2016-06-28T03%3A08%3A17.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: #fff;
+	height: 350px;
+	min-width: 100%;
 
-.event-date-month, .event-date-day-of-week, .event-date-divider {
-	margin: 0 0 5px 0;
-	padding: 0 0 0px 0;
-	font-family: "kulturista", Georgia, Times, "Times New Roman", serif;
-	font-size: 28px;
-	font-weight: normal;
-	color: #FFFFFF;
-	text-transform: uppercase;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
-}
-.event-date-month, .event-date-day-of-week, .event-date-day {
-	line-height: 1em;
-}
-.event-date {
-	background: #F1B51C;	
-	float: left;
-	height: 100%;
-	margin: 0px;
-	padding: 20px 20px 10px;
-	text-align: center;
-	width: 100%;   
-}
-.event-date-day {
-	margin: 0;
-	padding: 0;
-	font-family: "runda", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 30px;
-	font-weight: bold;
-	color: #FFFFFF;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.28);
-}
-.event-name {
-    font-size: 22px;
-	font-weight: bold;
-	margin-bottom: 0px;
-}
-.event-presenter {
-	font-size: 12px;
-	font-style: italic;
-}
-.event-subtitle {
-	font-size: 12px;
+	.columns {
+		padding:0;
+	}
+	#header-target {
+		background-color: rgba(0,0,0,0.75);
+		
+		.small-2 {
+    	height: 145px;
+    	background: $gold;
+    	font-family: $accent-font;
+	    	@media only screen and (min-width: 1026px) {
+	    		padding-top: 0;
+	    	}
+		}
+		.event-date {	
+			padding: 15px 10px;
+			font-size: 32px;
+			margin-left: 15px;
+			padding: 15px 10px;
+			text-align: center;
+				p {
+					margin-bottom: 0px;
+				}		
+		}
+		p.event-date-day-of-week {
+			font-size: 24px;
+		}
+		#event-details {
+			height: 145px;
+			padding: 15px;
+			text-align: center;
+			.event-presenter, .event-subtitle {
+				font-family: $accent-font;
+			}
+			.event-subtitle {
+				font-weight: 300;
+				font-style: italic;
+			}
+		}
+	}
+	h2 {
+		color: $gold;
+		font-family: $accent-font;
+	}
 }
 
-#event-date-box {
-	width: 30%;
-}
-#event-date-box.large-1 {
-	padding-right: 0px;
-}
-#event-location {
-	left: 0px;
-	padding: 20px 20px;
-	position: relative;
-    width: 55%;
-}
-#event-location a img {
-	position: relative;
-    left: 5px;
-    bottom: 2px;
-}
-#event-target img {
-	width:100%;
-}
-#header-target {
-	padding-right: 0px;
-	padding-left: 0px;
-	text-align: center;
-	width: 100%;
-}
-#header-target .large-4 {
-	text-align: left;
-}
-#header-target .large-7 {
-	text-align: center;
-}
-#header-target .large-7, #header-target .large-4 {
-	padding-top: 10px;
-}
-#header-target .row {
-	display: inline-flex;
-	height: 150px;
-	padding-top: 10px;
-	width: 100%;
-}
-.large-1.columns {
-	width: 40%;
-}
-.location-address span {
-	font-size: 12px;
-	display: block;
-}
-.location-name {
-	font-size: 14px;
-	font-weight: bold;
-}
-@media only screen and (min-width: 1026px) {
-	#header-target .large-4 {
-		padding-left: 0px;
-	}
-	#event-target .large-4 {
-    	width: 100%;
-	}
-	.event-location img {
-		padding-left: 5px;
-	}
-	.ticket-details {
-		padding-left: 0px;
-	}
-}
