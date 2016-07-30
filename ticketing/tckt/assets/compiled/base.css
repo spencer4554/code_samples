@@ -53,28 +53,72 @@ footer {
     color: #fff; }
   footer #footer-links {
     display: none; }
-  footer #copyright {
+  footer #copyright p {
+    font-family: "Syncopate", sans-serif;
+    font-size: 12px;
     text-align: center; }
+
+.gold {
+  color: #daa520; }
 
 div#cc-container {
   border: 1px solid black;
+  margin-left: 2px;
   padding-bottom: 30px; }
+  @media only screen and (min-width: 1026px) {
+    div#cc-container {
+      margin-left: 25px; } }
+
+#summary {
+  color: #fff;
+  background-color: black;
+  text-align: center;
+  font-size: 22px;
+  font-family: "Ubuntu", sans-serif;
+  padding-top: 15px; }
+  #summary .small-12 {
+    font-weight: 100; }
+
+div#summary-details {
+  background-color: black;
+  color: #f08a24;
+  margin-bottom: 20px;
+  margin-top: -1; }
+  div#summary-details span.break {
+    display: block; }
+  div#summary-details .small-4 {
+    color: #fff;
+    float: left;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 100;
+    font-size: 18px;
+    padding: 20px;
+    text-align: center; }
+
+div#cc-form {
+  padding-left: 0px;
+  margin-bottom: auto;
+  overflow: hidden;
+  padding: 0px;
+  width: 100%; }
+  div#cc-form p {
+    text-align: center; }
 
 input#cvc, select#exp_month {
   margin-right: 10px; }
 
 input#cvc, select#exp_month, select#exp_year {
-  float: left;
-  width: 140px; }
+  float: left; }
 
 input#number {
-  width: 365px;
   float: left;
   margin-right: 10px; }
 
 form {
-  width: 85%;
+  width: 90%;
   margin: auto; }
+  form .large-8, form .large-4, form .large-6, form .large-6 {
+    float: left; }
 
 .ticketing.cc-container form {
   width: 90%; }
@@ -83,15 +127,15 @@ form {
   width: 100%;
   text-align: center; }
 
+#address_city, #address_zip, #address_state {
+  float: left;
+  width: 33.3333%; }
+
 .ticketing-order-button-holder {
   padding: 20px 0px 10px 5px; }
 
 .order-button-holder {
   text-align: center; }
-
-.city-state-zip-section .city-state-zip-field {
-  float: left;
-  margin-right: 10px; }
 
 .button.order-button {
   margin: 0px; }
@@ -338,7 +382,7 @@ input.error-field, select.error-field {
     font-family: "Syncopate", sans-serif; }
 
 /* ------ events page  ----- */
-.ticketing-order-button-holder, .cc-button-container {
+.cc-button-container {
   padding: 10px 0 0 30px;
   text-align: center; }
 

@@ -7,10 +7,9 @@ var _ = require('underscore');
 var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined" ? global.$ : null);
 var number = require('../utils/number');
 var classNames = require('classnames');
-// var OrderSummary = require('./OrderSummary'); //
-// var Ticketing = require('./Ticketing');//
 
-
+var OrderSummary = require('./OrderSummary');
+// var Location = require('./Location');
 
 var CreditCard = React.createClass({displayName: 'CreditCard',
 
@@ -201,11 +200,15 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
             React.createElement("div", {className: "ticketing"}, 
               React.createElement("div", {className: "row", id: "cc-container"}, 
                   React.createElement("div", {className: "large-12 columns", id: "cc-form"}, 
-                    React.createElement("div", {className: "row", id: "summary"}, "Order Summary"), 
+                    React.createElement("div", {className: "row", id: "summary"}, 
+                      React.createElement("div", {className: "small-12"}, " ", this.props.name, " "), 
+                      React.createElement("div", {className: "small-12"}, " ", this.props.datetime, " ")
+                    ), 
+                    
                     React.createElement("div", {className: "row", id: "summary-details"}, 
-                      React.createElement("div", {className: "small-4"}, "Ticket Type: REGULAR"), 
-                      React.createElement("div", {className: "small-4"}, "Quantity: ", this.props.quantity), 
-                      React.createElement("div", {className: "small-4"}, "Total: ", this.props.total)
+                      React.createElement("div", {className: "small-4"}, "Ticket Type: ", React.createElement("span", {className: "break gold"}, "REGULAR")), 
+                      React.createElement("div", {className: "small-4"}, "Quantity: ", React.createElement("span", {className: "break gold"}, this.props.quantity)), 
+                      React.createElement("div", {className: "small-4"}, "Total: ", React.createElement("span", {className: "break gold"}, "$", this.props.total))
                     ), 
                     React.createElement("p", null, " ENTER YOUR PAYMENT DETAILS"), 
                      this.state.errorMessage !== null ? React.createElement("div", {className: "error-message"}, "* ",  this.state.errorMessage) : "", 
@@ -241,9 +244,16 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
     drawForm: function() {
         return (
             React.createElement("form", null, 
-              React.createElement("input", {className: this.getClasses("name"), onChange: this.handleChange, type: "text", id: "name", defaultValue: "Name"}), 
-              React.createElement("input", {className: this.getClasses("number"), onChange: this.handleChange, type: "text", id: "number", defaultValue: "Card Number", value: this.state.number}), 
-              React.createElement("input", {className: this.getClasses("cvc"), onChange: this.handleChange, type: "text", id: "cvc", defaultValue: "CVC/Security Code"}), 
+            React.createElement("div", {className: "large-12"}, 
+              React.createElement("input", {className: this.getClasses("name"), onChange: this.handleChange, type: "text", id: "name", defaultValue: "Name"})
+            ), 
+            React.createElement("div", {className: "large-8"}, 
+              React.createElement("input", {className: this.getClasses("number"), onChange: this.handleChange, type: "text", id: "number", defaultValue: "Card Number", value: this.state.number})
+            ), 
+            React.createElement("div", {className: "large-4"}, 
+              React.createElement("input", {className: this.getClasses("cvc"), onChange: this.handleChange, type: "text", id: "cvc", defaultValue: "CVC/Security Code"})
+            ), 
+            React.createElement("div", {className: "large-6"}, 
               React.createElement("select", {className: this.getClasses("exp_month"), onChange: this.handleChange, id: "exp_month"}, 
                   React.createElement("option", {value: ""}, "Expiration Month"), 
                   React.createElement("option", {value: "01"}, "01"), 
@@ -258,8 +268,10 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
                   React.createElement("option", {value: "10"}, "10"), 
                   React.createElement("option", {value: "11"}, "11"), 
                   React.createElement("option", {value: "12"}, "12")
+              )
               ), 
-              React.createElement("select", {className: this.getClasses("exp_year"), onChange: this.handleChange, id: "exp_year", style: {'width': 140}}, 
+              React.createElement("div", {className: "large-6"}, 
+              React.createElement("select", {className: this.getClasses("exp_year"), onChange: this.handleChange, id: "exp_year"}, 
                   React.createElement("option", {value: ""}, "Expiration Year"), 
                   React.createElement("option", {value: "2016"}, "2016"), 
                   React.createElement("option", {value: "2017"}, "2017"), 
@@ -273,13 +285,14 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
                   React.createElement("option", {value: "2025"}, "2025"), 
                   React.createElement("option", {value: "2026"}, "2026"), 
                   React.createElement("option", {value: "2027"}, "2027")
+              )
               ), 
               React.createElement("hr", null), 
               React.createElement("input", {className: this.getClasses("address_line1"), onChange: this.handleChange, type: "text", id: "address_line1", defaultValue: "Address line 1"}), 
               React.createElement("input", {className: this.getClasses("address_line2"), onChange: this.handleChange, type: "text", id: "address_line2", defaultValue: "Address line 2"}), 
               React.createElement("div", {className: "city-state-zip-section"}, 
-                React.createElement("input", {className: this.getClasses("address_city", ["city-state-zip-field"]), onChange: this.handleChange, type: "text", id: "address_city", defaultValue: "City", style: {'width': 170}}), 
-                React.createElement("select", {className: this.getClasses("address_state", ["city-state-zip-field"]), onChange: this.handleChange, id: "address_state", style: {'width': 100}}, 
+                React.createElement("input", {className: this.getClasses("address_city", ["city-state-zip-field"]), onChange: this.handleChange, type: "text", id: "address_city", defaultValue: "City"}), 
+                React.createElement("select", {className: this.getClasses("address_state", ["city-state-zip-field"]), onChange: this.handleChange, id: "address_state"}, 
                   React.createElement("option", {value: ""}, "State"), 
                   React.createElement("option", {value: "AL"}, "AL"), 
                   React.createElement("option", {value: "AK"}, "AK"), 
@@ -332,7 +345,7 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
                   React.createElement("option", {value: "WI"}, "WI"), 
                   React.createElement("option", {value: "WY"}, "WY")
                 ), 
-                React.createElement("input", {className: this.getClasses("address_zip", ["city-state-zip-field"]), onChange: this.handleChange, type: "text", id: "address_zip", defaultValue: "Zip Code", style: {'width': 130}})
+                React.createElement("input", {className: this.getClasses("address_zip", ["city-state-zip-field"]), onChange: this.handleChange, type: "text", id: "address_zip", defaultValue: "Zip Code"})
               )
             ));
     }
@@ -341,7 +354,7 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
 module.exports = CreditCard;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../utils/number":10,"classnames":11,"underscore":"9eM++n"}],2:[function(require,module,exports){
+},{"../utils/number":10,"./OrderSummary":5,"classnames":11,"underscore":"9eM++n"}],2:[function(require,module,exports){
 (function (global){
 /** @jsx React.DOM */
 
@@ -351,7 +364,7 @@ var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined
 var Ticketing = require('./Ticketing');
 var CreditCard = require('./CreditCard');
 var OrderSummary = require('./OrderSummary');
-// var Location = require('./Location');
+var Location = require('./Location');
 
 
 var Event = React.createClass({displayName: 'Event',
@@ -410,7 +423,6 @@ var Event = React.createClass({displayName: 'Event',
         props.purchase = this.purchase;
         props.showCreditCard = this.showCreditCard;
         return React.createElement(Ticketing, React.__spread({},  props));
-        // showCreditCard = {this.showCreditCard}
     },
 
     drawOrderSummaryOverlay: function() {
@@ -490,7 +502,7 @@ var Event = React.createClass({displayName: 'Event',
 module.exports = Event;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./CreditCard":1,"./OrderSummary":5,"./Ticketing":7,"underscore":"9eM++n"}],3:[function(require,module,exports){
+},{"./CreditCard":1,"./Location":4,"./OrderSummary":5,"./Ticketing":7,"underscore":"9eM++n"}],3:[function(require,module,exports){
 (function (global){
 /** @jsx React.DOM */
 
@@ -649,6 +661,7 @@ React = (typeof window !== "undefined" ? window.React : typeof global !== "undef
 var _ = require("underscore");
 var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined" ? global.$ : null);
 var number = require('../utils/number');
+// var Location = require('./Location');
 
 
 var Ticketing = React.createClass({displayName: 'Ticketing',

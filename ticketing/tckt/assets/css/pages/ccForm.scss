@@ -1,49 +1,70 @@
-
+.gold {
+    	color: $gold;
+    }
 div#cc-container {
 	border: 1px solid black;
+	margin-left: 2px;
 	padding-bottom: 30px;
+		@media only screen and (min-width: 1026px) {
+			margin-left:25px;
+	   }
 }
-// div#cc-form {
-// 	padding-left: 0px;
-// 	margin-bottom: auto;
-// 	padding: 0px;
-//     width: 100%;
-    
-//     div#summary.row {
-// 		text-align: center;
-// 	    border: 1px solid rgba(7, 7, 7, 0.63);
-// 	    height: 60px;
-// 	    font-size: 14px;
-// 	    padding: 20px;
-// 	    margin-bottom: 40px;
-// 	    font-family: "Syncopate", sans-serif;
-// 	    font-weight: 600;
-// 	    color: #f08a24;
-// 	    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.47);
-// 	    .small-4 {
-// 	    	float: left;
-// 	    }
-// 	}
-// 	p {
-// 		text-align: center;
-// 	}	
-// }
+#summary {
+	color: #fff;
+	background-color: black;
+	text-align: center;
+	font-size: 22px;
+	font-family: $general-font;
+	padding-top: 15px;
+    .small-12 {
+    	font-weight: 100;
+    }
+}
+div#summary-details {
+    background-color: black;
+    color: #f08a24;
+    margin-bottom: 20px;
+    margin-top: -1;
+    span.break {
+    	display: block;
+    }
+    .small-4 {
+	    color: #fff;
+	    float: left;
+			font-family: $general-font;
+	    font-weight: 100;
+	    font-size: 18px;  
+	    padding: 20px;
+	    text-align: center;
+	}	
+}
+div#cc-form {
+	padding-left: 0px;
+	margin-bottom: auto;
+	overflow: hidden;
+	padding: 0px;
+  width: 100%;
+	p {
+		text-align: center;
+	}	
+}
 
 input#cvc, select#exp_month {
 	margin-right: 10px;
 }
 input#cvc, select#exp_month, select#exp_year {
 	float: left;
-	width: 140px;
 }
 input#number {
-    width: 365px;
     float: left;
     margin-right: 10px;	
 }
 form {
-	width: 85%;
-    margin: auto;
+	width: 90%;
+  margin: auto;
+  .large-8, .large-4, .large-6, .large-6 {
+  	float: left;
+  }
 }
 .ticketing.cc-container form {
 	width: 90%;
@@ -52,13 +73,14 @@ form {
 	width: 100%;
 	text-align: center;
 }
+#address_city, #address_zip, #address_state {
+	float: left;
+	width: 33.3333%;
+}
 .ticketing-order-button-holder {
 	padding: 20px 0px 10px 5px;
 }
 .order-button-holder {
 	text-align: center;
 }
-.city-state-zip-section .city-state-zip-field {
-	float: left;
-	margin-right: 10px;
-}
+

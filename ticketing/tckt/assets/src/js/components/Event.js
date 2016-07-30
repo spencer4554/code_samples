@@ -6,7 +6,7 @@ var $ = require('jquery');
 var Ticketing = require('./Ticketing');
 var CreditCard = require('./CreditCard');
 var OrderSummary = require('./OrderSummary');
-// var Location = require('./Location');
+var Location = require('./Location');
 
 
 var Event = React.createClass({
@@ -65,7 +65,6 @@ var Event = React.createClass({
         props.purchase = this.purchase;
         props.showCreditCard = this.showCreditCard;
         return <Ticketing {...props}  />;
-        // showCreditCard = {this.showCreditCard}
     },
 
     drawOrderSummaryOverlay: function() {

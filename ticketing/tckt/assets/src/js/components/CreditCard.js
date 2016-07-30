@@ -5,10 +5,9 @@ var _ = require('underscore');
 var $ = require('jquery');
 var number = require('../utils/number');
 var classNames = require('classnames');
-// var OrderSummary = require('./OrderSummary'); //
-// var Ticketing = require('./Ticketing');//
 
-
+var OrderSummary = require('./OrderSummary');
+// var Location = require('./Location');
 
 var CreditCard = React.createClass({
 
@@ -199,11 +198,15 @@ var CreditCard = React.createClass({
             <div className="ticketing">          
               <div className="row" id="cc-container">
                   <div className="large-12 columns" id="cc-form">
-                    <div className="row" id="summary">Order Summary</div>
+                    <div className="row" id="summary">
+                      <div className="small-12"> {this.props.name} </div>
+                      <div className="small-12"> {this.props.datetime} </div>
+                    </div>
+                    
                     <div className="row" id="summary-details">
-                      <div className="small-4">Ticket Type: REGULAR</div>
-                      <div className="small-4">Quantity: {this.props.quantity}</div>
-                      <div className="small-4">Total: {this.props.total}</div>
+                      <div className="small-4">Ticket Type: <span className="break gold">REGULAR</span></div>
+                      <div className="small-4">Quantity: <span className="break gold">{this.props.quantity}</span></div>
+                      <div className="small-4">Total: <span className="break gold">${this.props.total}</span></div>
                     </div>
                     <p> ENTER YOUR PAYMENT DETAILS</p>
                     { this.state.errorMessage !== null ? <div className="error-message">* { this.state.errorMessage }</div> : "" }
@@ -239,9 +242,16 @@ var CreditCard = React.createClass({
     drawForm: function() {
         return (
             <form>
+            <div className="large-12">
               <input className={this.getClasses("name")} onChange={this.handleChange} type="text" id="name" defaultValue="Name" />
+            </div> 
+            <div className="large-8">
               <input className={this.getClasses("number")} onChange={this.handleChange} type="text" id="number" defaultValue="Card Number" value={this.state.number} />
+            </div>
+            <div className="large-4">
               <input className={this.getClasses("cvc")} onChange={this.handleChange} type="text" id="cvc" defaultValue="CVC/Security Code" />
+            </div>  
+            <div className="large-6">
               <select className={this.getClasses("exp_month")} onChange={this.handleChange} id="exp_month">
                   <option value="">Expiration Month</option>
                   <option value="01">01</option>
@@ -257,7 +267,9 @@ var CreditCard = React.createClass({
                   <option value="11">11</option>
                   <option value="12">12</option>
               </select>
-              <select className={this.getClasses("exp_year")} onChange={this.handleChange} id="exp_year" style={{'width': 140}}>
+              </div>
+              <div className="large-6">
+              <select className={this.getClasses("exp_year")} onChange={this.handleChange} id="exp_year">
                   <option value="">Expiration Year</option>
                   <option value="2016">2016</option>
                   <option value="2017">2017</option>
@@ -272,12 +284,13 @@ var CreditCard = React.createClass({
                   <option value="2026">2026</option>
                   <option value="2027">2027</option>
               </select>
+              </div>
               <hr />
               <input className={this.getClasses("address_line1")} onChange={this.handleChange} type="text" id="address_line1" defaultValue="Address line 1"/>
               <input className={this.getClasses("address_line2")}  onChange={this.handleChange} type="text" id="address_line2" defaultValue="Address line 2"/>
               <div className="city-state-zip-section">
-                <input className={this.getClasses("address_city", ["city-state-zip-field"])}  onChange={this.handleChange} type="text" id="address_city" defaultValue="City" style={{'width': 170}} />
-                <select className={this.getClasses("address_state", ["city-state-zip-field"])} onChange={this.handleChange} id="address_state" style={{'width': 100}}>
+                <input className={this.getClasses("address_city", ["city-state-zip-field"])}  onChange={this.handleChange} type="text" id="address_city" defaultValue="City" />
+                <select className={this.getClasses("address_state", ["city-state-zip-field"])} onChange={this.handleChange} id="address_state" >
                   <option value="">State</option>
                   <option value="AL">AL</option>
                   <option value="AK">AK</option>
@@ -330,7 +343,7 @@ var CreditCard = React.createClass({
                   <option value="WI">WI</option>
                   <option value="WY">WY</option>
                 </select>
-                <input className={this.getClasses("address_zip", ["city-state-zip-field"])} onChange={this.handleChange} type="text" id="address_zip" defaultValue="Zip Code" style={{'width': 130}} />
+                <input className={this.getClasses("address_zip", ["city-state-zip-field"])} onChange={this.handleChange} type="text" id="address_zip" defaultValue="Zip Code" />
               </div>
             </form>);
     }

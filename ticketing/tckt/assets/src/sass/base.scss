@@ -66,8 +66,12 @@ footer {
 		#footer-links {
 			display: none;
 		}
-		#copyright {
-			text-align: center;
+		#copyright {	
+			p {	
+				font-family: $accent-font;		
+				font-size: 12px;
+				text-align: center;
+			}
 		}
 }
 

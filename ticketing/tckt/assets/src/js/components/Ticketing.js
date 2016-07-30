@@ -4,6 +4,7 @@ React = require('react');
 var _ = require("underscore");
 var $ = require('jquery');
 var number = require('../utils/number');
+// var Location = require('./Location');
 
 
 var Ticketing = React.createClass({
