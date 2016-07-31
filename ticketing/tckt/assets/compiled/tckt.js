@@ -244,52 +244,61 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
     drawForm: function() {
         return (
             React.createElement("form", null, 
-            React.createElement("div", {className: "large-12"}, 
-              React.createElement("input", {className: this.getClasses("name"), onChange: this.handleChange, type: "text", id: "name", defaultValue: "Name"})
-            ), 
-            React.createElement("div", {className: "large-8"}, 
-              React.createElement("input", {className: this.getClasses("number"), onChange: this.handleChange, type: "text", id: "number", defaultValue: "Card Number", value: this.state.number})
-            ), 
-            React.createElement("div", {className: "large-4"}, 
-              React.createElement("input", {className: this.getClasses("cvc"), onChange: this.handleChange, type: "text", id: "cvc", defaultValue: "CVC/Security Code"})
-            ), 
-            React.createElement("div", {className: "large-6"}, 
-              React.createElement("select", {className: this.getClasses("exp_month"), onChange: this.handleChange, id: "exp_month"}, 
-                  React.createElement("option", {value: ""}, "Expiration Month"), 
-                  React.createElement("option", {value: "01"}, "01"), 
-                  React.createElement("option", {value: "02"}, "02"), 
-                  React.createElement("option", {value: "03"}, "03"), 
-                  React.createElement("option", {value: "04"}, "04"), 
-                  React.createElement("option", {value: "05"}, "05"), 
-                  React.createElement("option", {value: "06"}, "06"), 
-                  React.createElement("option", {value: "07"}, "07"), 
-                  React.createElement("option", {value: "08"}, "08"), 
-                  React.createElement("option", {value: "09"}, "09"), 
-                  React.createElement("option", {value: "10"}, "10"), 
-                  React.createElement("option", {value: "11"}, "11"), 
-                  React.createElement("option", {value: "12"}, "12")
+            React.createElement("div", {className: "row"}, 
+              React.createElement("div", {className: "large-12"}, 
+                React.createElement("input", {className: this.getClasses("name"), onChange: this.handleChange, type: "text", id: "name", defaultValue: "Name"})
               )
+            ), 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("div", {className: "large-8 small-6"}, 
+                React.createElement("input", {className: this.getClasses("number"), onChange: this.handleChange, type: "text", id: "number", defaultValue: "Card Number", value: this.state.number})
               ), 
-              React.createElement("div", {className: "large-6"}, 
-              React.createElement("select", {className: this.getClasses("exp_year"), onChange: this.handleChange, id: "exp_year"}, 
-                  React.createElement("option", {value: ""}, "Expiration Year"), 
-                  React.createElement("option", {value: "2016"}, "2016"), 
-                  React.createElement("option", {value: "2017"}, "2017"), 
-                  React.createElement("option", {value: "2018"}, "2018"), 
-                  React.createElement("option", {value: "2019"}, "2019"), 
-                  React.createElement("option", {value: "2020"}, "2020"), 
-                  React.createElement("option", {value: "2021"}, "2021"), 
-                  React.createElement("option", {value: "2022"}, "2022"), 
-                  React.createElement("option", {value: "2023"}, "2023"), 
-                  React.createElement("option", {value: "2024"}, "2024"), 
-                  React.createElement("option", {value: "2025"}, "2025"), 
-                  React.createElement("option", {value: "2026"}, "2026"), 
-                  React.createElement("option", {value: "2027"}, "2027")
+              React.createElement("div", {className: "large-4 small-2"}, 
+                React.createElement("input", {className: this.getClasses("cvc"), onChange: this.handleChange, type: "text", id: "cvc", defaultValue: "CVC/Security Code"})
+              ), 
+              React.createElement("div", {className: "large-6 small-2"}, 
+                React.createElement("select", {className: this.getClasses("exp_month"), onChange: this.handleChange, id: "exp_month"}, 
+                    React.createElement("option", {value: ""}, "Expiration Month"), 
+                    React.createElement("option", {value: "01"}, "01"), 
+                    React.createElement("option", {value: "02"}, "02"), 
+                    React.createElement("option", {value: "03"}, "03"), 
+                    React.createElement("option", {value: "04"}, "04"), 
+                    React.createElement("option", {value: "05"}, "05"), 
+                    React.createElement("option", {value: "06"}, "06"), 
+                    React.createElement("option", {value: "07"}, "07"), 
+                    React.createElement("option", {value: "08"}, "08"), 
+                    React.createElement("option", {value: "09"}, "09"), 
+                    React.createElement("option", {value: "10"}, "10"), 
+                    React.createElement("option", {value: "11"}, "11"), 
+                    React.createElement("option", {value: "12"}, "12")
+                )
+              ), 
+              React.createElement("div", {className: "large-6 small-2"}, 
+                React.createElement("select", {className: this.getClasses("exp_year"), onChange: this.handleChange, id: "exp_year"}, 
+                    React.createElement("option", {value: ""}, "Expiration Year"), 
+                    React.createElement("option", {value: "2016"}, "2016"), 
+                    React.createElement("option", {value: "2017"}, "2017"), 
+                    React.createElement("option", {value: "2018"}, "2018"), 
+                    React.createElement("option", {value: "2019"}, "2019"), 
+                    React.createElement("option", {value: "2020"}, "2020"), 
+                    React.createElement("option", {value: "2021"}, "2021"), 
+                    React.createElement("option", {value: "2022"}, "2022"), 
+                    React.createElement("option", {value: "2023"}, "2023"), 
+                    React.createElement("option", {value: "2024"}, "2024"), 
+                    React.createElement("option", {value: "2025"}, "2025"), 
+                    React.createElement("option", {value: "2026"}, "2026"), 
+                    React.createElement("option", {value: "2027"}, "2027")
+                )
               )
-              ), 
+            ), 
               React.createElement("hr", null), 
-              React.createElement("input", {className: this.getClasses("address_line1"), onChange: this.handleChange, type: "text", id: "address_line1", defaultValue: "Address line 1"}), 
-              React.createElement("input", {className: this.getClasses("address_line2"), onChange: this.handleChange, type: "text", id: "address_line2", defaultValue: "Address line 2"}), 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("input", {className: this.getClasses("address_line1"), onChange: this.handleChange, type: "text", id: "address_line1", defaultValue: "Address line 1"})
+            ), 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("input", {className: this.getClasses("address_line2"), onChange: this.handleChange, type: "text", id: "address_line2", defaultValue: "Address line 2"})
+            ), 
+            React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "city-state-zip-section"}, 
                 React.createElement("input", {className: this.getClasses("address_city", ["city-state-zip-field"]), onChange: this.handleChange, type: "text", id: "address_city", defaultValue: "City"}), 
                 React.createElement("select", {className: this.getClasses("address_state", ["city-state-zip-field"]), onChange: this.handleChange, id: "address_state"}, 
@@ -347,6 +356,7 @@ var CreditCard = React.createClass({displayName: 'CreditCard',
                 ), 
                 React.createElement("input", {className: this.getClasses("address_zip", ["city-state-zip-field"]), onChange: this.handleChange, type: "text", id: "address_zip", defaultValue: "Zip Code"})
               )
+            )
             ));
     }
 });
