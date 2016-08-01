@@ -476,27 +476,36 @@ var Event = React.createClass({displayName: 'Event',
                 React.createElement("div", {className: "event-detail"}, 
                   React.createElement("div", {className: "row"}, 
                     React.createElement("div", {className: "large-12 column"}, 
-                      React.createElement("span", {className: "small-4 ticket-column-headings"}, "Event Details"), 
+                      React.createElement("span", {className: "small-4 ticket-column-headings"}, "Event Details1"), 
                       React.createElement("p", {className: "event-details"}, this.props.description)
                     )
                   )
                 ), 
-                React.createElement("div", {className: "large-4 columns event-left-column"}, 
-                  React.createElement("div", {className: "small-4  event-image-container"}, React.createElement("img", {className: "event-col-img", src:  this.props.image})), 
-                    
-                  React.createElement("div", {className: "small-4 event-details2"}, 
-                    React.createElement("span", {className: "small-4 ticket-column-headings"}, "Event Details"), 
-                    React.createElement("p", {className: "event-details"}, this.props.description)
-                  ), 
 
-                  React.createElement("div", {className: "small-4 location-container"}, 
+                React.createElement("div", {className: "large-4 columns event-left-column-web"}, 
+                  React.createElement("div", {className: "small-12 event-image-container"}, React.createElement("img", {className: "event-col-img", src:  this.props.image})), 
+                  React.createElement("div", {className: "small-12 location-container"}, 
                     React.createElement(Location, React.__spread({},  this.props.location)), 
                     React.createElement("div", {className: "event-start"}, 
                       this.props.startText
                     )
                   )
-
                 ), 
+
+                 React.createElement("div", {className: "large-4 columns event-left-column-mobile"}, 
+                  React.createElement("div", {className: "small-4 event-image-container"}, React.createElement("img", {className: "event-col-img", src:  this.props.image})), 
+                  React.createElement("div", {className: "small-8 large-4 location-container"}, 
+                    React.createElement(Location, React.__spread({},  this.props.location)), 
+                    React.createElement("div", {className: "event-start"}, 
+                      this.props.startText
+                    )
+                  ), 
+                  React.createElement("div", {className: "small-12 large-8 event-details2"}, 
+                    React.createElement("span", {className: "ticket-column-headings"}, "Event Details2"), 
+                    React.createElement("p", {className: "event-details"}, this.props.description)
+                  )
+                ), 
+
                 React.createElement("div", {className: "large-8 columns event-right-column"}, 
                    this.state.showCreditCard ? this.drawCreditCard() : this.drawTicketing(), 
                   React.createElement("br", null)
@@ -525,14 +534,12 @@ var EventHeader = React.createClass({displayName: 'EventHeader',
     render: function() {
         return (
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "small-2 columns"}, 
-              React.createElement("div", {className: "event-date"}, 
-                React.createElement("p", {className: "event-date-day-of-week"},  this.props.dow), 
+            React.createElement("div", {className: "small-12 large-2 columns event-date"}, 
+                React.createElement("span", {className: "event-date-day-of-week"},  this.props.dow, " "), 
                 React.createElement("span", {className: "event-date-month"},  this.props.month, " "), 
                 React.createElement("span", {className: "event-date-day"},  this.props.day)
-              )
             ), 
-            React.createElement("div", {className: "small-10 columns", id: "event-details"}, 
+            React.createElement("div", {className: "small-12 large-10 columns", id: "event-details"}, 
               React.createElement("span", {className: "event-presenter"},  this.props.presenter), 
               React.createElement("h2", {className: "event-name"},  this.props.name), 
               React.createElement("span", {className: "event-subtitle"},  this.props.subtitle)

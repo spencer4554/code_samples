@@ -108,27 +108,36 @@ var Event = React.createClass({
                 <div className="event-detail">
                   <div className="row">
                     <div className="large-12 column">
-                      <span className="small-4 ticket-column-headings">Event Details</span>
+                      <span className="small-4 ticket-column-headings">Event Details1</span>
                       <p className="event-details">{this.props.description}</p>
                     </div>
                   </div>
-                </div>  
-                <div className="large-4 columns event-left-column">
-                  <div className="small-4  event-image-container"><img className="event-col-img" src={ this.props.image }/></div>     
-                    
-                  <div className="small-4 event-details2"> 
-                    <span className="small-4 ticket-column-headings">Event Details</span>
-                    <p className="event-details">{this.props.description}</p>               
-                  </div>      
+                </div> 
 
-                  <div className="small-4 location-container">
+                <div className="large-4 columns event-left-column-web">
+                  <div className="small-12 event-image-container"><img className="event-col-img" src={ this.props.image }/></div>         
+                  <div className="small-12 location-container">
                     <Location {...this.props.location} />
                     <div className="event-start">
                       {this.props.startText}
                     </div>
                   </div>
+                </div> 
 
-                </div>                              
+                 <div className="large-4 columns event-left-column-mobile">
+                  <div className="small-4 event-image-container"><img className="event-col-img" src={ this.props.image }/></div>         
+                  <div className="small-8 large-4 location-container">
+                    <Location {...this.props.location} />
+                    <div className="event-start">
+                      {this.props.startText}
+                    </div>
+                  </div>
+                  <div className="small-12 large-8 event-details2"> 
+                    <span className="ticket-column-headings">Event Details2</span>
+                    <p className="event-details">{this.props.description}</p>               
+                  </div>                  
+                </div>                
+
                 <div className="large-8 columns event-right-column">
                   { this.state.showCreditCard ? this.drawCreditCard() : this.drawTicketing() }
                   <br />

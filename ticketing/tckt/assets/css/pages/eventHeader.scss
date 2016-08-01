@@ -11,30 +11,45 @@
 	}
 	#header-target {
 		background-color: rgba(0,0,0,0.75);
-		
-		.small-2 {
-    	height: 145px;
-    	background: $gold;
+			@media only screen and (min-width: 1026px) {
+				max-height: 45%;
+				overflow: hidden;
+				padding-top: 0;
+			}	
+		.small-12, .large-2 {
     	font-family: $accent-font;
 	    	@media only screen and (min-width: 1026px) {
 	    		padding-top: 0;
 	    	}
 		}
-		.event-date {	
+		.event-date {
+		    background: $gold;
+		    font-family: $accent-font;	
 			padding: 15px 10px;
-			font-size: 32px;
-			margin-left: 15px;
 			padding: 15px 10px;
+			margin-bottom: 0px;
 			text-align: center;
-				p {
-					margin-bottom: 0px;
-				}		
+			
+			@media only screen and (min-width: 1026px) {
+				height: 100%;
+			}
+			span.event-date-month, span.event-date-day {
+				@media only screen and (min-width: 1026px) {
+					font-size: 32px;
+				}
+			}				
+			span.event-date-day-of-week {
+				@media only screen and (min-width: 1026px) {
+					font-size: 22px;
+					display: block;
+				}
+			}
+			span.event-date-month {
+				margin: 0 5px;
+			}						
 		}
-		p.event-date-day-of-week {
-			font-size: 24px;
-		}
+
 		#event-details {
-			height: 145px;
 			padding: 15px;
 			text-align: center;
 			.event-presenter, .event-subtitle {

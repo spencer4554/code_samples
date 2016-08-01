@@ -40,6 +40,7 @@ input.error-field, select.error-field {
 		span.small-4.ticket-column-headings {
 			@media only screen and (min-width: 1026px) {
 				float: left;
+				margin-top: 20px;
 			}
 		}			
 	}
@@ -49,51 +50,43 @@ input.error-field, select.error-field {
 		font-size:14px;
 		margin-top: 10px;
 	}
-	.event-left-column {
+	.event-left-column-web {
+		display: none;
 	    border-bottom: 1px solid #eee;
 		padding-bottom: 30px;
 
 	    @media only screen and (min-width: 1026px) {
+	    	display: block;
 			border-bottom: none;
 			padding-bottom: 0px;
 		}
 	    .small-4 {
-	    	float: left;
-	    	width: 33.33333%;
-		    @media only screen and (min-width: 1026px) {
-				float:none;
-				width: 100%;
-			}	    	
+			float:none;
+			width: 100%;
+		 //    @media only screen and (min-width: 1026px) {
+			// 	float:none;
+			// 	width: 100%;
+			// }	    	
 	    }
 		.event-image-container {
+			display: none;
 			margin-top: 25px;
 			text-align: center;
-
-			img {
-				margin-top: 40px;				
-				@media only screen and (min-width: 1026px) {
-					width: auto;
-				}	
-			}
+			display: inline-block;
 		}
 		.event-details2 {
-			padding: 30px;
+			float: left;
+			padding: 30px 0;
 			margin-top: 30px;
 		    
-		    @media only screen and (min-width: 1026px) {
-				display: none;
-			}
 			span {
 				width: 100%;
 				font-family: $accent-font;
 			}				
 		}		
 		.location-container {
-			margin-top: 60px;
-			
-			@media only screen and (min-width: 1026px) {
-				margin-top: 30px;
-			}
+			margin-top: 30px;
+
 			.ticket-column-headings {
 				font-family: $accent-font
 			}
@@ -104,6 +97,76 @@ input.error-field, select.error-field {
 			}
 			.event-start {
 				margin-top: 20px;
+		    	color: red;
+		    	font-family: $accent-font;
+			}
+			span.location-name {
+				font-family: $accent-font;
+				font-weight: 700;
+			}
+			.location-address {
+				margin-top: 10px;
+			    border-left: 1px solid #e5e5e5;
+			    padding-left: 14px;
+			    margin-left: 5px;
+					span {
+						font-family: $general-font;
+					}
+			}
+		}		
+	}
+
+	.event-left-column-mobile {
+	    border-bottom: 1px solid #eee;
+
+	    @media only screen and (min-width: 1026px) {
+	    	display: none;
+			border-bottom: none;
+			padding-bottom: 0px;
+		}
+	    .small-4 {
+	    	float: left;
+	    	width: 33.33333%;    	
+	    }
+		.event-image-container {
+			@media only screen and (max-width: 568px) {
+				display: none;
+			}
+			margin-top: 25px;
+			text-align: center;
+			img {
+				margin-top: 40px;	
+			}
+		}
+		.event-details2 {
+			float: left;
+			padding: 30px 0;
+		    
+			span {
+				width: 100%;
+				font-family: $accent-font;
+			}				
+		}		
+		.location-container {
+			margin-top: 60px;
+			float: left;
+    		padding-left: 1rem;
+    		padding-top: 1rem;
+			@media only screen and (max-width: 568px) {
+				padding-left: 0;
+				width: 100%;
+				margin-top: 10px;
+			}			
+			.ticket-column-headings {
+				font-family: $accent-font
+			}
+			.event-location {
+				img {
+					margin: 0 0 5px 5px;
+				}
+			}
+			.event-start {
+			margin-top: 20px;
 	    	color: red;
 	    	font-family: $accent-font;
 			}
@@ -112,19 +175,22 @@ input.error-field, select.error-field {
 				font-weight: 700;
 			}
 			.location-address {
-				margin-top: 10px;
+			margin-top: 10px;
 		    border-left: 1px solid #e5e5e5;
 		    padding-left: 14px;
 		    margin-left: 5px;
-					span {
-						font-family: $general-font;
-					}
+				span {
+					font-family: $general-font;
+				}
 			}
 		}		
 	}
+
+
+
 	.event-right-column {
 		padding: 0;
-	
+
 		.fade.in {
 			opacity: 1 !important;
 			transition: opacity 0.25s ease in out;
@@ -155,9 +221,13 @@ input.error-field, select.error-field {
 		  	font-family: $general-font;
 		}	
 		.ticketing {
-			border-left: 1px solid #eee;
-			padding: 30px 10px 10px;		
+			padding: 30px 15px 0;
 			
+			@media only screen and (min-width: 1026px){
+				padding: 30px 10px 10px;
+				border-left: 1px solid #eee;	
+			}
+					
 			.ticket-details {
 				margin-top: 40px;
 				text-align: left;		
@@ -169,6 +239,8 @@ input.error-field, select.error-field {
 				
 				ul li {
 					padding-top: 23px;
+					padding-left: 0px;
+    				padding-right: 0px;
 				}						
 			}	
 		}
@@ -215,7 +287,7 @@ input.error-field, select.error-field {
 			font-size: 22px;
 		}
 		.ticketing-selects-row {
-    		margin: 40px 1.1rem;
+    		margin: 40px 0;
     		.large-12 {
     			height: 75px;
     		}

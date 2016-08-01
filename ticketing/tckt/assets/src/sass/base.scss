@@ -22,6 +22,9 @@ p {
 h1, h2, h3, h4, h5 {
 	font-family: $accent-font;
 }
+#main {
+	overflow: hidden;
+}
 .error-message {
 	padding-bottom: 10px;
 	color: red;
@@ -53,7 +56,6 @@ footer {
 		#footer {
 			background-color: #000;
 			color: #fff;
-			margin-top: 30px;
 			padding: 20px 30px 10px 20px;  
 			width: 100%; 
 		 }
